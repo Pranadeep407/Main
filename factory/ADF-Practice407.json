@@ -1,0 +1,9 @@
+{
+	"name": "ADF-Practice407",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "b37d7b84-a48d-4103-a764-ec187aff0dac",
+		"tenantId": "16b3c013-d300-468d-ac64-7eda0820b6d3"
+	}
+}
