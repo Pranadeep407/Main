@@ -1,0 +1,90 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ADF-Practice407"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_password": {
+			"value": ""
+		},
+		"AzureSqlDatabase2_password": {
+			"value": ""
+		},
+		"AzureSqlDatabase3_password": {
+			"value": ""
+		},
+		"Sftp1_password": {
+			"value": ""
+		},
+		"Sftp2_password": {
+			"value": ""
+		},
+		"SqlServer1_password": {
+			"value": ""
+		},
+		"AzureBlobStorage1_sasUri": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://adlspractice1.dfs.core.windows.net/"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "server-apple.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "DB_Apple"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "Apple"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_server": {
+			"value": "server-apple.database.windows.net"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_database": {
+			"value": "DB_Apple"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_userName": {
+			"value": "Apple"
+		},
+		"AzureSqlDatabase3_properties_typeProperties_server": {
+			"value": "server-apple.database.windows.net"
+		},
+		"AzureSqlDatabase3_properties_typeProperties_database": {
+			"value": "DB_Apple"
+		},
+		"AzureSqlDatabase3_properties_typeProperties_userName": {
+			"value": "Apple"
+		},
+		"Sftp1_properties_typeProperties_host": {
+			"value": "hffhef.com"
+		},
+		"Sftp1_properties_typeProperties_hostKeyFingerprint": {
+			"value": "ejhewuifhf"
+		},
+		"Sftp1_properties_typeProperties_userName": {
+			"value": "Apple"
+		},
+		"Sftp2_properties_typeProperties_host": {
+			"value": "adlspractice1.blob.core.windows.net"
+		},
+		"Sftp2_properties_typeProperties_hostKeyFingerprint": {
+			"value": "ecdsa-sha2-nistp256 256 8f:6b:08:21:b2:53:d6:67:c8:01:a0:13:d7:6e:5f:ed"
+		},
+		"Sftp2_properties_typeProperties_userName": {
+			"value": "adlspractice1.prac.prana111"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"value": "SalesDB"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"value": "AppleSQL"
+		}
+	}
+}
