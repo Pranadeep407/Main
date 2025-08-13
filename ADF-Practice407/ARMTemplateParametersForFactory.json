@@ -17,6 +17,9 @@
 		"AzureSqlDatabase3_password": {
 			"value": ""
 		},
+		"MVnet_ADLS_accountKey": {
+			"value": ""
+		},
 		"Sftp1_password": {
 			"value": ""
 		},
@@ -24,9 +27,6 @@
 			"value": ""
 		},
 		"SqlServer1_password": {
-			"value": ""
-		},
-		"MVnet_ADLS_accountKey": {
 			"value": ""
 		},
 		"AzureBlobStorage1_sasUri": {
@@ -62,6 +62,9 @@
 		"AzureSqlDatabase3_properties_typeProperties_userName": {
 			"value": "Apple"
 		},
+		"MVnet_ADLS_properties_typeProperties_url": {
+			"value": "https://adlspractice1.dfs.core.windows.net/"
+		},
 		"Sftp1_properties_typeProperties_host": {
 			"value": "hffhef.com"
 		},
@@ -89,14 +92,17 @@
 		"SqlServer1_properties_typeProperties_userName": {
 			"value": "AppleSQL"
 		},
+		"AzureDataLakeStorage995_properties_privateLinkResourceId": {
+			"value": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/ADF2/providers/Microsoft.Storage/storageAccounts/adf2adf"
+		},
+		"AzureDataLakeStorage995_properties_groupId": {
+			"value": "dfs"
+		},
 		"Managed_ADLS_properties_privateLinkResourceId": {
 			"value": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Storage/storageAccounts/adlspractice1"
 		},
 		"Managed_ADLS_properties_groupId": {
 			"value": "dfs"
-		},
-		"MVnet_ADLS_properties_typeProperties_url": {
-			"value": "https://adlspractice1.dfs.core.windows.net/"
 		}
 	}
 }
