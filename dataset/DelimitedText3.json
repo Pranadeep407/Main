@@ -1,0 +1,61 @@
+{
+	"name": "DelimitedText3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "stage-plutus-dataenrichment-adf_Trigger runs.csv",
+				"folderPath": "Input",
+				"fileSystem": "prac"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Trigger name",
+				"type": "String"
+			},
+			{
+				"name": "Trigger time",
+				"type": "String"
+			},
+			{
+				"name": "Status",
+				"type": "String"
+			},
+			{
+				"name": "Pipelines",
+				"type": "String"
+			},
+			{
+				"name": "Trigger file name",
+				"type": "String"
+			},
+			{
+				"name": "Trigger file size",
+				"type": "String"
+			},
+			{
+				"name": "Message",
+				"type": "String"
+			},
+			{
+				"name": "Properties",
+				"type": "String"
+			},
+			{
+				"name": "Run ID",
+				"type": "String"
+			}
+		]
+	}
+}
