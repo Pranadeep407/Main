@@ -246,18 +246,6 @@
 					},
 					"SqlServer1_properties_typeProperties_userName": {
 						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
-					},
-					"AzureDataLakeStorage995_properties_privateLinkResourceId": {
-						"value": "[parameters('AzureDataLakeStorage995_properties_privateLinkResourceId')]"
-					},
-					"AzureDataLakeStorage995_properties_groupId": {
-						"value": "[parameters('AzureDataLakeStorage995_properties_groupId')]"
-					},
-					"Managed_ADLS_properties_privateLinkResourceId": {
-						"value": "[parameters('Managed_ADLS_properties_privateLinkResourceId')]"
-					},
-					"Managed_ADLS_properties_groupId": {
-						"value": "[parameters('Managed_ADLS_properties_groupId')]"
 					}
 				}
 			},
@@ -279,6 +267,18 @@
 					},
 					"MVnet_ADLS_accountKey": {
 						"value": "[parameters('MVnet_ADLS_accountKey')]"
+					},
+					"AzureDataLakeStorage995_properties_privateLinkResourceId": {
+						"value": "[parameters('AzureDataLakeStorage995_properties_privateLinkResourceId')]"
+					},
+					"AzureDataLakeStorage995_properties_groupId": {
+						"value": "[parameters('AzureDataLakeStorage995_properties_groupId')]"
+					},
+					"Managed_ADLS_properties_privateLinkResourceId": {
+						"value": "[parameters('Managed_ADLS_properties_privateLinkResourceId')]"
+					},
+					"Managed_ADLS_properties_groupId": {
+						"value": "[parameters('Managed_ADLS_properties_groupId')]"
 					},
 					"MVnet_ADLS_properties_typeProperties_url": {
 						"value": "[parameters('MVnet_ADLS_properties_typeProperties_url')]"
