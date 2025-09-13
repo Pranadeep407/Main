@@ -8,16 +8,13 @@
 		"AzureDataLakeStorage1_accountKey": {
 			"value": ""
 		},
-		"AzureSqlDatabase1_password": {
-			"value": ""
-		},
-		"AzureSqlDatabase2_password": {
-			"value": ""
-		},
-		"AzureSqlDatabase3_password": {
+		"AzureSqlDatabase3_connectionString": {
 			"value": ""
 		},
 		"MVnet_ADLS_accountKey": {
+			"value": ""
+		},
+		"MySql1_password": {
 			"value": ""
 		},
 		"Sftp1_password": {
@@ -29,41 +26,20 @@
 		"SqlServer1_password": {
 			"value": ""
 		},
-		"AzureBlobStorage1_sasUri": {
-			"value": ""
-		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://adlspractice1.dfs.core.windows.net/"
 		},
-		"AzureSqlDatabase1_properties_typeProperties_server": {
-			"value": "server-apple.database.windows.net"
-		},
-		"AzureSqlDatabase1_properties_typeProperties_database": {
-			"value": "DB_Apple"
-		},
-		"AzureSqlDatabase1_properties_typeProperties_userName": {
-			"value": "Apple"
-		},
-		"AzureSqlDatabase2_properties_typeProperties_server": {
-			"value": "server-apple.database.windows.net"
-		},
-		"AzureSqlDatabase2_properties_typeProperties_database": {
-			"value": "DB_Apple"
-		},
-		"AzureSqlDatabase2_properties_typeProperties_userName": {
-			"value": "Apple"
-		},
-		"AzureSqlDatabase3_properties_typeProperties_server": {
-			"value": "server-apple.database.windows.net"
-		},
-		"AzureSqlDatabase3_properties_typeProperties_database": {
-			"value": "DB_Apple"
-		},
-		"AzureSqlDatabase3_properties_typeProperties_userName": {
-			"value": "Apple"
-		},
 		"MVnet_ADLS_properties_typeProperties_url": {
 			"value": "https://adlspractice1.dfs.core.windows.net/"
+		},
+		"MySql1_properties_typeProperties_server": {
+			"value": "localhost"
+		},
+		"MySql1_properties_typeProperties_database": {
+			"value": "adf_ls"
+		},
+		"MySql1_properties_typeProperties_username": {
+			"value": "adf_user_ls"
 		},
 		"Sftp1_properties_typeProperties_host": {
 			"value": "hffhef.com"
@@ -97,6 +73,12 @@
 		},
 		"AzureDataLakeStorage995_properties_groupId": {
 			"value": "dfs"
+		},
+		"AzureSqlDatabase6_properties_privateLinkResourceId": {
+			"value": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Sql/servers/server-apple"
+		},
+		"AzureSqlDatabase6_properties_groupId": {
+			"value": "sqlServer"
 		},
 		"Managed_ADLS_properties_privateLinkResourceId": {
 			"value": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Storage/storageAccounts/adlspractice1"
