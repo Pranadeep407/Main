@@ -1,0 +1,7 @@
+{
+	"name": "AzureSqlDatabase6",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Sql/servers/server-apple",
+		"groupId": "sqlServer"
+	}
+}
