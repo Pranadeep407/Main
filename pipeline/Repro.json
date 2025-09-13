@@ -26,6 +26,56 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "FileID",
+									"type": "Int32",
+									"physicalType": "Int32"
+								},
+								"sink": {
+									"name": "id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "FileName",
+									"type": "String",
+									"physicalType": "VarChar"
+								},
+								"sink": {
+									"name": "filename",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "FileContent",
+									"type": "Byte[]",
+									"physicalType": "VarBinary"
+								},
+								"sink": {
+									"name": "filecontent",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "UploadedOn",
+									"type": "DateTime",
+									"physicalType": "Timestamp"
+								},
+								"sink": {
+									"name": "uploaded_Date",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
