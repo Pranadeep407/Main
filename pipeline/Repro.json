@@ -29,50 +29,98 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "FileID",
-									"type": "Int32",
-									"physicalType": "Int32"
+									"name": "id",
+									"type": "Int64",
+									"physicalType": "Int64"
 								},
 								"sink": {
 									"name": "id",
-									"type": "Int32",
-									"physicalType": "int"
+									"type": "Int64",
+									"physicalType": "bigint"
 								}
 							},
 							{
 								"source": {
-									"name": "FileName",
+									"name": "investor_type",
 									"type": "String",
 									"physicalType": "VarChar"
 								},
 								"sink": {
-									"name": "filename",
+									"name": "investor_type",
 									"type": "String",
-									"physicalType": "varchar"
+									"physicalType": "nvarchar"
 								}
 							},
 							{
 								"source": {
-									"name": "FileContent",
+									"name": "investor_id",
+									"type": "Int64",
+									"physicalType": "Int64"
+								},
+								"sink": {
+									"name": "investor_id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "created_at",
+									"type": "DateTime",
+									"physicalType": "DateTime"
+								},
+								"sink": {
+									"name": "created_at",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "updated_at",
+									"type": "DateTime",
+									"physicalType": "DateTime"
+								},
+								"sink": {
+									"name": "updated_at",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "investment_account_uuid",
 									"type": "Byte[]",
 									"physicalType": "VarBinary"
 								},
 								"sink": {
-									"name": "filecontent",
+									"name": "investment_account_uuid",
 									"type": "String",
 									"physicalType": "varchar"
 								}
 							},
 							{
 								"source": {
-									"name": "UploadedOn",
-									"type": "DateTime",
-									"physicalType": "Timestamp"
+									"name": "subaccount_uuid",
+									"type": "Byte[]",
+									"physicalType": "VarBinary"
 								},
 								"sink": {
-									"name": "uploaded_Date",
-									"type": "DateTime",
-									"physicalType": "datetime"
+									"name": "subaccount_uuid",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "account_id",
+									"type": "Int64",
+									"physicalType": "Int64"
+								},
+								"sink": {
+									"name": "account_id",
+									"type": "Int64",
+									"physicalType": "bigint"
 								}
 							}
 						],
@@ -97,6 +145,8 @@
 				]
 			}
 		],
-		"annotations": []
-	}
+		"annotations": [],
+		"lastPublishTime": "2025-09-14T06:27:59Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }

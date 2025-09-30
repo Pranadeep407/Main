@@ -1,0 +1,23 @@
+{
+	"name": "AzurePostgreSql1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzurePostgreSql",
+		"version": "2.0",
+		"typeProperties": {
+			"server": "apple123.postgres.database.azure.com",
+			"port": "5432",
+			"database": "postgres",
+			"sslMode": 2,
+			"username": "apple123",
+			"authenticationType": "Basic",
+			"timeout": 0,
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJhYjYxMjQxMi0yZjJhLTQzYWQtODI4ZC1jM2U0ODk1YmU0MTciLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "OnPremIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

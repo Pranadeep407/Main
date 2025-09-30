@@ -1,5 +1,5 @@
 {
-	"name": "pipeline4",
+	"name": "Repro2",
 	"properties": {
 		"activities": [
 			{
@@ -16,30 +16,31 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
+						"type": "MySqlSource",
+						"query": "SELECT CAST(investment_account_uuid AS CHAR) AS investment_account_uuid\nFROM investmentaaaccc;"
 					},
 					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
-						}
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "investment_account_uuid",
+									"type": "Byte[]",
+									"physicalType": "VarBinary"
+								},
+								"sink": {
+									"name": "investment_account_uuid",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
@@ -49,20 +50,20 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DelimitedText3",
+						"referenceName": "MySqlTable2",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DelimitedText4",
+						"referenceName": "AzureSqlTable2",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2025-08-18T07:36:57Z"
+		"lastPublishTime": "2025-09-26T09:15:45Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

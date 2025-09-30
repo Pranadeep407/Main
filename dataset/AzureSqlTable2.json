@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable1",
+	"name": "AzureSqlTable2",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase3",
@@ -9,28 +9,13 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "id",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "filename",
+				"name": "investment_account_uuid",
 				"type": "varchar"
-			},
-			{
-				"name": "filecontent",
-				"type": "varchar"
-			},
-			{
-				"name": "uploaded_Date",
-				"type": "datetime",
-				"precision": 23,
-				"scale": 3
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "InvestmentAccounts"
+			"table": "investmentaaaccc"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"

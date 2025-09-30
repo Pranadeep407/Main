@@ -1,5 +1,5 @@
 {
-	"name": "MySqlTable1",
+	"name": "MySqlTable3",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "MySql1",
@@ -9,7 +9,7 @@
 		"type": "MySqlTable",
 		"schema": [],
 		"typeProperties": {
-			"tableName": "`investmentaccounts`"
+			"tableName": "`investmentaaaccc`"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
