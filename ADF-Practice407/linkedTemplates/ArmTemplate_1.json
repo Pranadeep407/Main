@@ -3015,13 +3015,6 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "pipeline2",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					},
-					{
-						"pipelineReference": {
 							"referenceName": "pipeline4",
 							"type": "PipelineReference"
 						},
@@ -3033,8 +3026,8 @@
 					"recurrence": {
 						"frequency": "Minute",
 						"interval": 1,
-						"startTime": "2025-10-06T13:30:00",
-						"endTime": "2025-10-06T13:31:00",
+						"startTime": "2025-10-06T13:45:00",
+						"endTime": "2025-10-06T13:45:00",
 						"timeZone": "India Standard Time"
 					}
 				}
