@@ -7,9 +7,9 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "ADF-Practice407"
 		},
-		"AzureDataLakeStorage1_accountKey": {
+		"AzurePostgreSql1_password": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+			"metadata": "Secure string for 'password' of 'AzurePostgreSql1'"
 		},
 		"AzureSqlDatabase3_connectionString": {
 			"type": "secureString",
@@ -38,6 +38,18 @@
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlspractice1.dfs.core.windows.net/"
+		},
+		"AzurePostgreSql1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "apple123.postgres.database.azure.com"
+		},
+		"AzurePostgreSql1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "postgres"
+		},
+		"AzurePostgreSql1_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "apple123"
 		},
 		"MVnet_ADLS_properties_typeProperties_url": {
 			"type": "string",
@@ -99,6 +111,12 @@
 			"type": "string",
 			"defaultValue": "dfs"
 		},
+		"AzureDataLakeStorage995_properties_fqdns": {
+			"type": "array",
+			"defaultValue": [
+				"adf2adf.dfs.core.windows.net"
+			]
+		},
 		"AzureSqlDatabase6_properties_privateLinkResourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Sql/servers/server-apple"
@@ -107,6 +125,12 @@
 			"type": "string",
 			"defaultValue": "sqlServer"
 		},
+		"AzureSqlDatabase6_properties_fqdns": {
+			"type": "array",
+			"defaultValue": [
+				"server-apple.database.windows.net"
+			]
+		},
 		"Managed_ADLS_properties_privateLinkResourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Storage/storageAccounts/adlspractice1"
@@ -114,6 +138,12 @@
 		"Managed_ADLS_properties_groupId": {
 			"type": "string",
 			"defaultValue": "dfs"
+		},
+		"Managed_ADLS_properties_fqdns": {
+			"type": "array",
+			"defaultValue": [
+				"adlspractice1.dfs.core.windows.net"
+			]
 		},
 		"containerUri": {
 			"type": "string",
@@ -142,14 +172,14 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"AzureDataLakeStorage1_accountKey": {
-						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
-					},
 					"Sftp1_password": {
 						"value": "[parameters('Sftp1_password')]"
 					},
 					"Sftp2_password": {
 						"value": "[parameters('Sftp2_password')]"
+					},
+					"AzurePostgreSql1_password": {
+						"value": "[parameters('AzurePostgreSql1_password')]"
 					},
 					"MySql1_password": {
 						"value": "[parameters('MySql1_password')]"
@@ -178,6 +208,15 @@
 					"Sftp2_properties_typeProperties_userName": {
 						"value": "[parameters('Sftp2_properties_typeProperties_userName')]"
 					},
+					"AzurePostgreSql1_properties_typeProperties_server": {
+						"value": "[parameters('AzurePostgreSql1_properties_typeProperties_server')]"
+					},
+					"AzurePostgreSql1_properties_typeProperties_database": {
+						"value": "[parameters('AzurePostgreSql1_properties_typeProperties_database')]"
+					},
+					"AzurePostgreSql1_properties_typeProperties_username": {
+						"value": "[parameters('AzurePostgreSql1_properties_typeProperties_username')]"
+					},
 					"MySql1_properties_typeProperties_server": {
 						"value": "[parameters('MySql1_properties_typeProperties_server')]"
 					},
@@ -195,24 +234,6 @@
 					},
 					"SqlServer1_properties_typeProperties_userName": {
 						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
-					},
-					"AzureDataLakeStorage995_properties_privateLinkResourceId": {
-						"value": "[parameters('AzureDataLakeStorage995_properties_privateLinkResourceId')]"
-					},
-					"AzureDataLakeStorage995_properties_groupId": {
-						"value": "[parameters('AzureDataLakeStorage995_properties_groupId')]"
-					},
-					"AzureSqlDatabase6_properties_privateLinkResourceId": {
-						"value": "[parameters('AzureSqlDatabase6_properties_privateLinkResourceId')]"
-					},
-					"AzureSqlDatabase6_properties_groupId": {
-						"value": "[parameters('AzureSqlDatabase6_properties_groupId')]"
-					},
-					"Managed_ADLS_properties_privateLinkResourceId": {
-						"value": "[parameters('Managed_ADLS_properties_privateLinkResourceId')]"
-					},
-					"Managed_ADLS_properties_groupId": {
-						"value": "[parameters('Managed_ADLS_properties_groupId')]"
 					}
 				}
 			},
@@ -237,6 +258,33 @@
 					},
 					"MVnet_ADLS_accountKey": {
 						"value": "[parameters('MVnet_ADLS_accountKey')]"
+					},
+					"AzureDataLakeStorage995_properties_privateLinkResourceId": {
+						"value": "[parameters('AzureDataLakeStorage995_properties_privateLinkResourceId')]"
+					},
+					"AzureDataLakeStorage995_properties_groupId": {
+						"value": "[parameters('AzureDataLakeStorage995_properties_groupId')]"
+					},
+					"AzureDataLakeStorage995_properties_fqdns": {
+						"value": "[parameters('AzureDataLakeStorage995_properties_fqdns')]"
+					},
+					"AzureSqlDatabase6_properties_privateLinkResourceId": {
+						"value": "[parameters('AzureSqlDatabase6_properties_privateLinkResourceId')]"
+					},
+					"AzureSqlDatabase6_properties_groupId": {
+						"value": "[parameters('AzureSqlDatabase6_properties_groupId')]"
+					},
+					"AzureSqlDatabase6_properties_fqdns": {
+						"value": "[parameters('AzureSqlDatabase6_properties_fqdns')]"
+					},
+					"Managed_ADLS_properties_privateLinkResourceId": {
+						"value": "[parameters('Managed_ADLS_properties_privateLinkResourceId')]"
+					},
+					"Managed_ADLS_properties_groupId": {
+						"value": "[parameters('Managed_ADLS_properties_groupId')]"
+					},
+					"Managed_ADLS_properties_fqdns": {
+						"value": "[parameters('Managed_ADLS_properties_fqdns')]"
 					},
 					"MVnet_ADLS_properties_typeProperties_url": {
 						"value": "[parameters('MVnet_ADLS_properties_typeProperties_url')]"

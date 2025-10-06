@@ -5,7 +5,7 @@
 		"factoryName": {
 			"value": "ADF-Practice407"
 		},
-		"AzureDataLakeStorage1_accountKey": {
+		"AzurePostgreSql1_password": {
 			"value": ""
 		},
 		"AzureSqlDatabase3_connectionString": {
@@ -28,6 +28,15 @@
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://adlspractice1.dfs.core.windows.net/"
+		},
+		"AzurePostgreSql1_properties_typeProperties_server": {
+			"value": "apple123.postgres.database.azure.com"
+		},
+		"AzurePostgreSql1_properties_typeProperties_database": {
+			"value": "postgres"
+		},
+		"AzurePostgreSql1_properties_typeProperties_username": {
+			"value": "apple123"
 		},
 		"MVnet_ADLS_properties_typeProperties_url": {
 			"value": "https://adlspractice1.dfs.core.windows.net/"
@@ -74,17 +83,32 @@
 		"AzureDataLakeStorage995_properties_groupId": {
 			"value": "dfs"
 		},
+		"AzureDataLakeStorage995_properties_fqdns": {
+			"value": [
+				"adf2adf.dfs.core.windows.net"
+			]
+		},
 		"AzureSqlDatabase6_properties_privateLinkResourceId": {
 			"value": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Sql/servers/server-apple"
 		},
 		"AzureSqlDatabase6_properties_groupId": {
 			"value": "sqlServer"
 		},
+		"AzureSqlDatabase6_properties_fqdns": {
+			"value": [
+				"server-apple.database.windows.net"
+			]
+		},
 		"Managed_ADLS_properties_privateLinkResourceId": {
 			"value": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Storage/storageAccounts/adlspractice1"
 		},
 		"Managed_ADLS_properties_groupId": {
 			"value": "dfs"
+		},
+		"Managed_ADLS_properties_fqdns": {
+			"value": [
+				"adlspractice1.dfs.core.windows.net"
+			]
 		},
 		"containerUri": {
 			"value": ""
