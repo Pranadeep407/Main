@@ -234,6 +234,15 @@
 					},
 					"SqlServer1_properties_typeProperties_userName": {
 						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
+					},
+					"AzureDataLakeStorage995_properties_privateLinkResourceId": {
+						"value": "[parameters('AzureDataLakeStorage995_properties_privateLinkResourceId')]"
+					},
+					"AzureDataLakeStorage995_properties_groupId": {
+						"value": "[parameters('AzureDataLakeStorage995_properties_groupId')]"
+					},
+					"AzureDataLakeStorage995_properties_fqdns": {
+						"value": "[parameters('AzureDataLakeStorage995_properties_fqdns')]"
 					}
 				}
 			},
@@ -258,15 +267,6 @@
 					},
 					"MVnet_ADLS_accountKey": {
 						"value": "[parameters('MVnet_ADLS_accountKey')]"
-					},
-					"AzureDataLakeStorage995_properties_privateLinkResourceId": {
-						"value": "[parameters('AzureDataLakeStorage995_properties_privateLinkResourceId')]"
-					},
-					"AzureDataLakeStorage995_properties_groupId": {
-						"value": "[parameters('AzureDataLakeStorage995_properties_groupId')]"
-					},
-					"AzureDataLakeStorage995_properties_fqdns": {
-						"value": "[parameters('AzureDataLakeStorage995_properties_fqdns')]"
 					},
 					"AzureSqlDatabase6_properties_privateLinkResourceId": {
 						"value": "[parameters('AzureSqlDatabase6_properties_privateLinkResourceId')]"

@@ -4003,11 +4003,18 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipelines": [
 					{
 						"pipelineReference": {
 							"referenceName": "pipeline2",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "pipeline4",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -4018,14 +4025,15 @@
 					"recurrence": {
 						"frequency": "Minute",
 						"interval": 1,
-						"startTime": "2025-10-06T13:15:00",
-						"endTime": "2025-10-06T13:17:00",
+						"startTime": "2025-10-06T13:30:00",
+						"endTime": "2025-10-06T13:31:00",
 						"timeZone": "India Standard Time"
 					}
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pipeline2')]"
+				"[concat(variables('factoryId'), '/pipelines/pipeline2')]",
+				"[concat(variables('factoryId'), '/pipelines/pipeline4')]"
 			]
 		},
 		{
