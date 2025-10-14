@@ -29,6 +29,9 @@
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://adlspractice1.dfs.core.windows.net/"
 		},
+		"AzureDataLakeStorage2_sasUri": {
+			"value": ""
+		},
 		"AzurePostgreSql1_properties_typeProperties_server": {
 			"value": "apple123.postgres.database.azure.com"
 		},
@@ -76,6 +79,12 @@
 		},
 		"SqlServer1_properties_typeProperties_userName": {
 			"value": "AppleSQL"
+		},
+		"AzureBlobStorage870_properties_privateLinkResourceId": {
+			"value": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Storage/storageAccounts/blob0120120120"
+		},
+		"AzureBlobStorage870_properties_groupId": {
+			"value": "blob"
 		},
 		"AzureDataLakeStorage995_properties_privateLinkResourceId": {
 			"value": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/ADF2/providers/Microsoft.Storage/storageAccounts/adf2adf"

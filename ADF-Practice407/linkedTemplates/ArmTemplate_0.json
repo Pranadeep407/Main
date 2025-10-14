@@ -31,6 +31,10 @@
 			"type": "string",
 			"defaultValue": "https://adlspractice1.dfs.core.windows.net/"
 		},
+		"AzureDataLakeStorage2_sasUri": {
+			"type": "secureString",
+			"metadata": "Secure string for 'sasUri' of 'AzureDataLakeStorage2'"
+		},
 		"Sftp1_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "hffhef.com"
@@ -90,20 +94,6 @@
 		"SqlServer1_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "AppleSQL"
-		},
-		"AzureDataLakeStorage995_properties_privateLinkResourceId": {
-			"type": "string",
-			"defaultValue": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/ADF2/providers/Microsoft.Storage/storageAccounts/adf2adf"
-		},
-		"AzureDataLakeStorage995_properties_groupId": {
-			"type": "string",
-			"defaultValue": "dfs"
-		},
-		"AzureDataLakeStorage995_properties_fqdns": {
-			"type": "array",
-			"defaultValue": [
-				"adf2adf.dfs.core.windows.net"
-			]
 		}
 	},
 	"variables": {
@@ -298,6 +288,20 @@
 				"type": "AzureBlobFS",
 				"typeProperties": {
 					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "sample",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"sasUri": "[parameters('AzureDataLakeStorage2_sasUri')]"
 				}
 			},
 			"dependsOn": []
@@ -742,19 +746,6 @@
 					"type": "ManagedVirtualNetworkReference",
 					"referenceName": "default"
 				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/default/AzureDataLakeStorage995')]",
-			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"privateLinkResourceId": "[parameters('AzureDataLakeStorage995_properties_privateLinkResourceId')]",
-				"groupId": "[parameters('AzureDataLakeStorage995_properties_groupId')]",
-				"fqdns": "[parameters('AzureDataLakeStorage995_properties_fqdns')]"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"

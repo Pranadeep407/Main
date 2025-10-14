@@ -39,6 +39,10 @@
 			"type": "string",
 			"defaultValue": "https://adlspractice1.dfs.core.windows.net/"
 		},
+		"AzureDataLakeStorage2_sasUri": {
+			"type": "secureString",
+			"metadata": "Secure string for 'sasUri' of 'AzureDataLakeStorage2'"
+		},
 		"AzurePostgreSql1_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "apple123.postgres.database.azure.com"
@@ -102,6 +106,14 @@
 		"SqlServer1_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "AppleSQL"
+		},
+		"AzureBlobStorage870_properties_privateLinkResourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Storage/storageAccounts/blob0120120120"
+		},
+		"AzureBlobStorage870_properties_groupId": {
+			"type": "string",
+			"defaultValue": "blob"
 		},
 		"AzureDataLakeStorage995_properties_privateLinkResourceId": {
 			"type": "string",
@@ -190,6 +202,9 @@
 					"AzureDataLakeStorage1_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
 					},
+					"AzureDataLakeStorage2_sasUri": {
+						"value": "[parameters('AzureDataLakeStorage2_sasUri')]"
+					},
 					"Sftp1_properties_typeProperties_host": {
 						"value": "[parameters('Sftp1_properties_typeProperties_host')]"
 					},
@@ -234,15 +249,6 @@
 					},
 					"SqlServer1_properties_typeProperties_userName": {
 						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
-					},
-					"AzureDataLakeStorage995_properties_privateLinkResourceId": {
-						"value": "[parameters('AzureDataLakeStorage995_properties_privateLinkResourceId')]"
-					},
-					"AzureDataLakeStorage995_properties_groupId": {
-						"value": "[parameters('AzureDataLakeStorage995_properties_groupId')]"
-					},
-					"AzureDataLakeStorage995_properties_fqdns": {
-						"value": "[parameters('AzureDataLakeStorage995_properties_fqdns')]"
 					}
 				}
 			},
@@ -267,6 +273,21 @@
 					},
 					"MVnet_ADLS_accountKey": {
 						"value": "[parameters('MVnet_ADLS_accountKey')]"
+					},
+					"AzureBlobStorage870_properties_privateLinkResourceId": {
+						"value": "[parameters('AzureBlobStorage870_properties_privateLinkResourceId')]"
+					},
+					"AzureBlobStorage870_properties_groupId": {
+						"value": "[parameters('AzureBlobStorage870_properties_groupId')]"
+					},
+					"AzureDataLakeStorage995_properties_privateLinkResourceId": {
+						"value": "[parameters('AzureDataLakeStorage995_properties_privateLinkResourceId')]"
+					},
+					"AzureDataLakeStorage995_properties_groupId": {
+						"value": "[parameters('AzureDataLakeStorage995_properties_groupId')]"
+					},
+					"AzureDataLakeStorage995_properties_fqdns": {
+						"value": "[parameters('AzureDataLakeStorage995_properties_fqdns')]"
 					},
 					"AzureSqlDatabase6_properties_privateLinkResourceId": {
 						"value": "[parameters('AzureSqlDatabase6_properties_privateLinkResourceId')]"
@@ -293,6 +314,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'ADF-Practice407_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "ADF-Practice407_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF-Practice407_ArmTemplate_1')]"
 			]
 		}
 	]
