@@ -5,7 +5,7 @@
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
-			"sasUri": "https://adlspractice1.blob.core.windows.net/?sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupyx&se=2025-10-15T15:54:14Z&st=2025-10-14T07:39:14Z&spr=https&sig=T9JRP8jIVtWmH5l9H4BF9oyB3TcBp5CXgDkqYlvK060%3D?sv=2024-11-04&ss=bfqt&srt=sco&sp=rwdlacupyx&se=2025-10-15T15:54:14Z&st=2025-10-14T07:39:14Z&spr=https&sig=T9JRP8jIVtWmH5l9H4BF9oyB3TcBp5CXgDkqYlvK060%3D?"
+			"sasUri": "https://adlspractice1.blob.core.windows.net/"
 		}
 	}
 }
