@@ -5,13 +5,12 @@
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"server": "server-apple.database.windows.net",
-			"database": "DB_Apple",
-			"encrypt": "mandatory",
-			"trustServerCertificate": false,
-			"authenticationType": "SQL",
-			"userName": "Apple",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDNGOUU2QkU3LTQxMDAtNDIyOS1BRjQ2LTgxQTZFRDBGM0UyOV9lYjc4NDExYi02ODZhLTRiMWYtYjVkMi05NjIxNDEyNzA5YjgiDQp9"
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=server-apple.database.windows.net;initial catalog=DB_Apple;user id=Apple",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDNGOUU2QkU3LTQxMDAtNDIyOS1BRjQ2LTgxQTZFRDBGM0UyOV9iMGYxNjQwNS05N2M2LTQ4NzEtODczMS04OTk0NDZlYWU1ZTciDQp9"
+		},
+		"connectVia": {
+			"referenceName": "ManagedIR",
+			"type": "IntegrationRuntimeReference"
 		}
 	}
 }

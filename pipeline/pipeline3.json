@@ -1,20 +1,19 @@
 {
-	"name": "4MB_Limit",
+	"name": "pipeline3",
 	"properties": {
 		"activities": [
 			{
-				"name": "Fail1",
-				"type": "Fail",
+				"name": "Wait1",
+				"type": "Wait",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"message": "dmnjnf",
-					"errorCode": "404"
+					"waitTimeInSeconds": 1
 				}
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2025-08-13T08:49:25Z"
+		"lastPublishTime": "2025-08-18T07:36:57Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

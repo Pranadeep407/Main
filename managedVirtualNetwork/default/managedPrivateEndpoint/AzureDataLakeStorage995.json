@@ -1,0 +1,10 @@
+{
+	"name": "AzureDataLakeStorage995",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/ADF2/providers/Microsoft.Storage/storageAccounts/adf2adf",
+		"groupId": "dfs",
+		"fqdns": [
+			"adf2adf.dfs.core.windows.net"
+		]
+	}
+}
