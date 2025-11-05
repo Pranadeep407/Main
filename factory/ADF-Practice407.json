@@ -2,7 +2,10 @@
 	"name": "ADF-Practice407",
 	"properties": {
 		"globalConfigurations": {
-			"PipelineBillingEnabled": "true"
+			"PipelineBillingEnabled": "true",
+			"factoryStagingLSReferenceName": "AzureDataLakeStorage1",
+			"factoryStagingLSType": "LinkedServiceReference",
+			"factoryStagingFolderPath": "prac/Output"
 		}
 	},
 	"location": "eastus",
