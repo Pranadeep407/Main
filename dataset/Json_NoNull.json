@@ -1,0 +1,125 @@
+{
+	"name": "Json_NoNull",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "_MConverter.eu_json.json",
+				"folderPath": "Input",
+				"fileSystem": "prac"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"productListItems": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"_adobe_corpnew": {
+								"type": "string"
+							},
+							"priceTotal": {
+								"type": "number"
+							},
+							"_experience": {
+								"type": "object",
+								"properties": {
+									"analytics": {
+										"type": "object",
+										"properties": {
+											"customDimensions": {
+												"type": "object",
+												"properties": {
+													"eVars": {
+														"type": "object",
+														"properties": {
+															"eVar97": {
+																"type": "string"
+															},
+															"eVar124": {
+																"type": "string"
+															},
+															"eVar61": {
+																"type": "string"
+															},
+															"eVar25": {
+																"type": "string"
+															},
+															"eVar90": {
+																"type": "string"
+															},
+															"eVar41": {
+																"type": "string"
+															}
+														}
+													}
+												}
+											},
+											"event301to400": {
+												"type": "string"
+											},
+											"event101to200": {
+												"type": "string"
+											},
+											"event801to900": {
+												"type": "string"
+											},
+											"event401to500": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							},
+							"quantity": {
+								"type": "number"
+							},
+							"SKU": {
+								"type": "string"
+							}
+						}
+					}
+				},
+				"commerce": {
+					"type": "object",
+					"properties": {
+						"order": {
+							"type": "string"
+						},
+						"purchases": {
+							"type": "object",
+							"properties": {
+								"value": {
+									"type": "number"
+								},
+								"id": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"botDetection": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"score": {
+							"type": "number"
+						}
+					}
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

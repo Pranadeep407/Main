@@ -1,5 +1,6 @@
 {
 	"name": "AzureDataLakeStorage1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureBlobFS",
@@ -7,6 +8,5 @@
 			"url": "https://adlspractice1.dfs.core.windows.net/"
 		},
 		"description": "dasada"
-	},
-	"type": "Microsoft.DataFactory/factories/linkedservices"
+	}
 }

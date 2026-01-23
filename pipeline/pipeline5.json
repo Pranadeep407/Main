@@ -1,0 +1,145 @@
+{
+	"name": "pipeline5",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['productListItems'][0]['_adobe_corpnew']"
+								},
+								"sink": {
+									"name": "_adobe_corpnew"
+								}
+							},
+							{
+								"source": {
+									"path": "$['productListItems'][0]['priceTotal']"
+								},
+								"sink": {
+									"name": "priceTotal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['productListItems'][0]['_experience']"
+								},
+								"sink": {
+									"name": "_experience"
+								}
+							},
+							{
+								"source": {
+									"path": "$['productListItems'][0]['quantity']"
+								},
+								"sink": {
+									"name": "quantity"
+								}
+							},
+							{
+								"source": {
+									"path": "$['productListItems'][0]['SKU']"
+								},
+								"sink": {
+									"name": "SKU"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commerce']['order']"
+								},
+								"sink": {
+									"name": "order"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commerce']['purchases']['value']"
+								},
+								"sink": {
+									"name": "value"
+								}
+							},
+							{
+								"source": {
+									"path": "$['commerce']['purchases']['id']"
+								},
+								"sink": {
+									"name": "id"
+								}
+							},
+							{
+								"source": {
+									"path": "$['botDetection']['name']"
+								},
+								"sink": {
+									"name": "name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['botDetection']['score']"
+								},
+								"sink": {
+									"name": "score"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Json1_Null",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "curated_output",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-01-05T12:14:40Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
