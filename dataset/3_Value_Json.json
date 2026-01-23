@@ -1,0 +1,78 @@
+{
+	"name": "3_Value_Json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "new_3_Json.txt",
+				"folderPath": "Input",
+				"fileSystem": "prac"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"productListItems": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"_adobe_corpnew": {
+								"type": "null"
+							},
+							"priceTotal": {
+								"type": "number"
+							},
+							"_experience": {
+								"type": "null"
+							},
+							"quantity": {
+								"type": "number"
+							},
+							"SKU": {
+								"type": "string"
+							}
+						}
+					}
+				},
+				"commerce": {
+					"type": "object",
+					"properties": {
+						"order": {
+							"type": "null"
+						},
+						"purchases": {
+							"type": "object",
+							"properties": {
+								"value": {
+									"type": "number"
+								},
+								"id": {
+									"type": "null"
+								}
+							}
+						}
+					}
+				},
+				"botDetection": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"type": "null"
+						},
+						"score": {
+							"type": "number"
+						}
+					}
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
