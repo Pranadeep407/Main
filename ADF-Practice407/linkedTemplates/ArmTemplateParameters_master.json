@@ -41,6 +41,12 @@
 		"AzurePostgreSql1_properties_typeProperties_username": {
 			"value": "apple123"
 		},
+		"AzureSqlDatabase4_properties_typeProperties_server": {
+			"value": "vaprna.database.windows.net"
+		},
+		"AzureSqlDatabase4_properties_typeProperties_database": {
+			"value": "db_apple"
+		},
 		"MVnet_ADLS_properties_typeProperties_url": {
 			"value": "https://adlspractice1.dfs.core.windows.net/"
 		},
@@ -86,6 +92,11 @@
 		"AzureBlobStorage870_properties_groupId": {
 			"value": "blob"
 		},
+		"AzureBlobStorage870_properties_fqdns": {
+			"value": [
+				"blob0120120120.blob.core.windows.net"
+			]
+		},
 		"AzureDataLakeStorage995_properties_privateLinkResourceId": {
 			"value": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/ADF2/providers/Microsoft.Storage/storageAccounts/adf2adf"
 		},
@@ -95,6 +106,17 @@
 		"AzureDataLakeStorage995_properties_fqdns": {
 			"value": [
 				"adf2adf.dfs.core.windows.net"
+			]
+		},
+		"AzureSqlDatabase470_properties_privateLinkResourceId": {
+			"value": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Sql/servers/vaprna"
+		},
+		"AzureSqlDatabase470_properties_groupId": {
+			"value": "sqlServer"
+		},
+		"AzureSqlDatabase470_properties_fqdns": {
+			"value": [
+				"vaprna.database.windows.net"
 			]
 		},
 		"AzureSqlDatabase6_properties_privateLinkResourceId": {
