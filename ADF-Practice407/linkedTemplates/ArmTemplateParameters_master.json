@@ -141,6 +141,9 @@
 				"adlspractice1.dfs.core.windows.net"
 			]
 		},
+		"trigger2_properties_typeProperties_scope": {
+			"value": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Storage/storageAccounts/adlspractice1"
+		},
 		"containerUri": {
 			"value": ""
 		},
