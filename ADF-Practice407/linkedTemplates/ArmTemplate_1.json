@@ -131,6 +131,133 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/Rev')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "new_Json_Rev.txt",
+						"folderPath": "Input",
+						"fileSystem": "prac"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"productListItems": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"_adobe_corpnew": {
+										"type": "string"
+									},
+									"priceTotal": {
+										"type": "null"
+									},
+									"_experience": {
+										"type": "object",
+										"properties": {
+											"analytics": {
+												"type": "object",
+												"properties": {
+													"customDimensions": {
+														"type": "object",
+														"properties": {
+															"eVars": {
+																"type": "object",
+																"properties": {
+																	"eVar97": {
+																		"type": "string"
+																	},
+																	"eVar124": {
+																		"type": "null"
+																	},
+																	"eVar61": {
+																		"type": "null"
+																	},
+																	"eVar25": {
+																		"type": "null"
+																	},
+																	"eVar90": {
+																		"type": "string"
+																	},
+																	"eVar41": {
+																		"type": "null"
+																	}
+																}
+															}
+														}
+													},
+													"event301to400": {
+														"type": "null"
+													},
+													"event101to200": {
+														"type": "null"
+													},
+													"event801to900": {
+														"type": "null"
+													},
+													"event401to500": {
+														"type": "null"
+													}
+												}
+											}
+										}
+									},
+									"quantity": {
+										"type": "null"
+									},
+									"SKU": {
+										"type": "string"
+									}
+								}
+							}
+						},
+						"commerce": {
+							"type": "object",
+							"properties": {
+								"order": {
+									"type": "null"
+								},
+								"purchases": {
+									"type": "object",
+									"properties": {
+										"value": {
+											"type": "number"
+										},
+										"id": {
+											"type": "null"
+										}
+									}
+								}
+							}
+						},
+						"botDetection": {
+							"type": "object",
+							"properties": {
+								"name": {
+									"type": "null"
+								},
+								"score": {
+									"type": "number"
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/curated_output')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -737,81 +864,6 @@
 				"[concat(variables('factoryId'), '/datasets/raw_input')]",
 				"[concat(variables('factoryId'), '/datasets/curated_output')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline4')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy data1",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "DelimitedText3",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DelimitedText4",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2025-11-05T10:08:07Z"
-			},
-			"dependsOn": []
 		}
 	]
 }
