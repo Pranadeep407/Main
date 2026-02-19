@@ -1,12 +1,16 @@
 {
 	"name": "AzureDataLakeStorage1",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"description": "dasada",
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
 			"url": "https://adlspractice1.dfs.core.windows.net/"
 		},
-		"description": "dasada"
-	}
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
