@@ -1,0 +1,25 @@
+{
+	"name": "trigger3",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "4MB_Limit",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2026-02-21T07:32:00",
+				"endTime": "2026-02-22T10:32:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}
