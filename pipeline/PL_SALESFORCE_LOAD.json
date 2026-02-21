@@ -1,0 +1,762 @@
+{
+	"name": "PL_SALESFORCE_LOAD",
+	"properties": {
+		"activities": [
+			{
+				"name": "EXEC_PL_SOURCE_SUCCESS_LOG",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "LOAD_SALESFORCE_TO_DW",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_SOURCE_SUCCESS_LOG",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"DataFactory": {
+							"value": "@pipeline().DataFactory",
+							"type": "Expression"
+						},
+						"Pipeline_Name": {
+							"value": "@pipeline().Pipeline",
+							"type": "Expression"
+						},
+						"RunId": {
+							"value": "@pipeline().RunId",
+							"type": "Expression"
+						},
+						"SourceSystem": {
+							"value": "@pipeline().parameters.SourceSystem",
+							"type": "Expression"
+						},
+						"FullRefresh": {
+							"value": "@pipeline().parameters.FullRefresh",
+							"type": "Expression"
+						},
+						"SourceSchema": {
+							"value": "@pipeline().parameters.SourceSchema",
+							"type": "Expression"
+						},
+						"SourceTable": {
+							"value": "@pipeline().parameters.SourceTable",
+							"type": "Expression"
+						},
+						"DestinationSchema": {
+							"value": "@pipeline().parameters.DestinationSchema",
+							"type": "Expression"
+						},
+						"DestinationTable": {
+							"value": "@pipeline().parameters.DestinationTable",
+							"type": "Expression"
+						},
+						"TriggerType": {
+							"value": "@pipeline().TriggerType",
+							"type": "Expression"
+						},
+						"TriggerId": {
+							"value": "@pipeline().TriggerId",
+							"type": "Expression"
+						},
+						"TriggerName": {
+							"value": "@pipeline().TriggerName",
+							"type": "Expression"
+						},
+						"TriggerTime": {
+							"value": "@pipeline().TriggerTime",
+							"type": "Expression"
+						},
+						"RowsCopied": {
+							"value": "@activity('LOAD_SALESFORCE_TO_DW').output.RowsCopied",
+							"type": "Expression"
+						},
+						"RowsRead": {
+							"value": "@activity('LOAD_SALESFORCE_TO_DW').output.RowsRead",
+							"type": "Expression"
+						},
+						"No_ParallelCopies": {
+							"value": "@activity('LOAD_SALESFORCE_TO_DW').output.usedParallelCopies",
+							"type": "Expression"
+						},
+						"copyDuration": {
+							"value": "@activity('LOAD_SALESFORCE_TO_DW').output.copyDuration",
+							"type": "Expression"
+						},
+						"effectiveIntegrationRuntime": {
+							"value": "@activity('LOAD_SALESFORCE_TO_DW').output.effectiveIntegrationRuntime",
+							"type": "Expression"
+						},
+						"Source_Type": {
+							"value": "@activity('LOAD_SALESFORCE_TO_DW').output.executionDetails[0].source",
+							"type": "Expression"
+						},
+						"Sink_Type": {
+							"value": "@activity('LOAD_SALESFORCE_TO_DW').output.executionDetails[0].sink",
+							"type": "Expression"
+						},
+						"Execution_Status": {
+							"value": "@activity('LOAD_SALESFORCE_TO_DW').output.executionDetails[0].status",
+							"type": "Expression"
+						},
+						"CopyActivity_Start_Time": {
+							"value": "@activity('LOAD_SALESFORCE_TO_DW').output.executionDetails[0].start",
+							"type": "Expression"
+						},
+						"CopyActivity_End_Time": {
+							"value": "@utcNow()",
+							"type": "Expression"
+						},
+						"CopyActivity_queuingDuration_in_secs": {
+							"value": "@activity('LOAD_SALESFORCE_TO_DW').output.executionDetails[0].detailedDurations.queuingDuration",
+							"type": "Expression"
+						},
+						"CopyActivity_preCopyScriptDuration_in_secs": {
+							"value": "@activity('LOAD_SALESFORCE_TO_DW').output.executionDetails[0].detailedDurations.preCopyScriptDuration\n",
+							"type": "Expression"
+						},
+						"CopyActivity_transferDuration_in_secs": {
+							"value": "@activity('LOAD_SALESFORCE_TO_DW').output.executionDetails[0].detailedDurations.transferDuration",
+							"type": "Expression"
+						},
+						"SourceLoad": {
+							"value": "@pipeline().parameters.SourceLoad",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "EXEC_PL_ERROR_LOG",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "LOAD_SALESFORCE_TO_DW",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_ERROR_LOG",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"DataFactory": {
+							"value": "@pipeline().DataFactory",
+							"type": "Expression"
+						},
+						"Pipeline_Name": {
+							"value": "@pipeline().Pipeline",
+							"type": "Expression"
+						},
+						"RunId": {
+							"value": "@pipeline().RunId",
+							"type": "Expression"
+						},
+						"SourceSystem": {
+							"value": "@pipeline().parameters.SourceSystem",
+							"type": "Expression"
+						},
+						"FullRefresh": {
+							"value": "@pipeline().parameters.FullRefresh",
+							"type": "Expression"
+						},
+						"SourceSchema": {
+							"value": "@pipeline().parameters.SourceSchema",
+							"type": "Expression"
+						},
+						"SourceTable": {
+							"value": "@pipeline().parameters.SourceTable",
+							"type": "Expression"
+						},
+						"DestinationSchema": {
+							"value": "@pipeline().parameters.DestinationSchema",
+							"type": "Expression"
+						},
+						"DestinationTable": {
+							"value": "@pipeline().parameters.DestinationTable",
+							"type": "Expression"
+						},
+						"TriggerType": {
+							"value": "@pipeline().TriggerType",
+							"type": "Expression"
+						},
+						"TriggerId": {
+							"value": "@pipeline().TriggerId",
+							"type": "Expression"
+						},
+						"TriggerName": {
+							"value": "@pipeline().TriggerName",
+							"type": "Expression"
+						},
+						"TriggerTime": {
+							"value": "@pipeline().TriggerTime",
+							"type": "Expression"
+						},
+						"ErrorDescription": {
+							"value": "@{REPLACE(REPLACE(activity('LOAD_SALESFORCE_TO_DW').error.message,'\"',''),'''','')}\n\n",
+							"type": "Expression"
+						},
+						"ErrorCode": {
+							"value": "@activity('LOAD_SALESFORCE_TO_DW').error.errorCode",
+							"type": "Expression"
+						},
+						"ErrorLoggedTime": {
+							"value": "@utcNow()",
+							"type": "Expression"
+						},
+						"FailureType": {
+							"value": "@activity('LOAD_SALESFORCE_TO_DW').error.failureType",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "EXEC_POST_LOAD_STG",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "EXEC_PL_SOURCE_SUCCESS_LOG",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_POST_LOAD_STG",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"SourceSystem": {
+							"value": "@pipeline().parameters.SourceSystem\n",
+							"type": "Expression"
+						},
+						"Active": {
+							"value": "@pipeline().parameters.Active",
+							"type": "Expression"
+						},
+						"SourceSchema": {
+							"value": "@pipeline().parameters.SourceSchema",
+							"type": "Expression"
+						},
+						"SourceRootSchema": {
+							"value": "@pipeline().parameters.SourceRootSchema",
+							"type": "Expression"
+						},
+						"SourceTable": {
+							"value": "@pipeline().parameters.SourceTable",
+							"type": "Expression"
+						},
+						"SourceUniqueColumn": {
+							"value": "@pipeline().parameters.SourceUniqueColumn",
+							"type": "Expression"
+						},
+						"FullRefresh": {
+							"value": "@pipeline().parameters.FullRefresh",
+							"type": "Expression"
+						},
+						"FullRefreshOnly": {
+							"value": "@pipeline().parameters.FullRefreshOnly",
+							"type": "Expression"
+						},
+						"TriggerName": {
+							"value": "@pipeline().parameters.TriggerName",
+							"type": "Expression"
+						},
+						"WatermarkColumn": {
+							"value": "@pipeline().parameters.WatermarkColumn",
+							"type": "Expression"
+						},
+						"WatermarkValue": {
+							"value": "@pipeline().parameters.WatermarkValue",
+							"type": "Expression"
+						},
+						"WatermarkFilter": {
+							"value": "@pipeline().parameters.WatermarkFilter",
+							"type": "Expression"
+						},
+						"NumParallel": {
+							"value": "@pipeline().parameters.NumParallel",
+							"type": "Expression"
+						},
+						"ADLSContainer": {
+							"value": "@pipeline().parameters.ADLSContainer",
+							"type": "Expression"
+						},
+						"FileType": {
+							"value": "@pipeline().parameters.FileType",
+							"type": "Expression"
+						},
+						"IMPSchema": {
+							"value": "@pipeline().parameters.IMPSchema",
+							"type": "Expression"
+						},
+						"StageSchema": {
+							"value": "@pipeline().parameters.StageSchema",
+							"type": "Expression"
+						},
+						"EDMSchema": {
+							"value": "@pipeline().parameters.EDMSchema",
+							"type": "Expression"
+						},
+						"EDWSchema": {
+							"value": "@pipeline().parameters.EDWSchema",
+							"type": "Expression"
+						},
+						"MARTSchema": {
+							"value": "@pipeline().parameters.MARTSchema",
+							"type": "Expression"
+						},
+						"METASchema": {
+							"value": "@pipeline().parameters.MetaName",
+							"type": "Expression"
+						},
+						"LOGSchema": {
+							"value": "@pipeline().parameters.LOGSchema",
+							"type": "Expression"
+						},
+						"DestinationTable": {
+							"value": "@pipeline().parameters.DestinationTable",
+							"type": "Expression"
+						},
+						"DestinationSQLServer": {
+							"value": "@pipeline().parameters.DestinationSQLServer",
+							"type": "Expression"
+						},
+						"SourceDatabase": {
+							"value": "@pipeline().parameters.SourceDatabase",
+							"type": "Expression"
+						},
+						"SourceUser": {
+							"value": "@pipeline().parameters.ServerUser",
+							"type": "Expression"
+						},
+						"SourceServer": {
+							"value": "@pipeline().parameters.ServerName",
+							"type": "Expression"
+						},
+						"UniqueKeySQLForUpsert": {
+							"value": "@pipeline().parameters.UniqueKeySQLForUpsert",
+							"type": "Expression"
+						},
+						"UpsertMethod": {
+							"value": "@pipeline().parameters.UpsertMethod",
+							"type": "Expression"
+						},
+						"MetaName": "meta",
+						"ControlTableName": "EDW_ControlTable",
+						"ADFTriggerName": {
+							"value": "@pipeline().TriggerName",
+							"type": "Expression"
+						},
+						"ADFTriggerType": {
+							"value": "@pipeline().TriggerType",
+							"type": "Expression"
+						},
+						"ADFTriggerID": {
+							"value": "@pipeline().TriggerId",
+							"type": "Expression"
+						},
+						"overrideSQL": {
+							"value": "@pipeline().parameters.overrideSQL",
+							"type": "Expression"
+						},
+						"SourceType": {
+							"value": "@pipeline().parameters.SourceType",
+							"type": "Expression"
+						},
+						"RefreshFlags": {
+							"value": "@pipeline().parameters.RefreshFlags",
+							"type": "Expression"
+						},
+						"FilePathName": {
+							"value": "@pipeline().parameters.FilePathName",
+							"type": "Expression"
+						},
+						"FileName": {
+							"value": "@pipeline().parameters.FileName",
+							"type": "Expression"
+						},
+						"NewWatermarkValue": {
+							"value": "@pipeline().parameters.NewWatermarkValue",
+							"type": "Expression"
+						},
+						"tablecreatewithclause": {
+							"value": "@pipeline().parameters.tablecreatewithclause",
+							"type": "Expression"
+						},
+						"DestinationSchema": {
+							"value": "@pipeline().parameters.DestinationSchema",
+							"type": "Expression"
+						},
+						"CopyActivity_Start_Time": {
+							"value": "@activity('LOAD_SALESFORCE_TO_DW').output.executionDetails[0].start",
+							"type": "Expression"
+						},
+						"RunId": {
+							"value": "@pipeline().RunId",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "LOAD_SALESFORCE_TO_DW",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "LOAD_SALESFORCE_TO_PREIMP",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlDWSource",
+						"sqlReaderQuery": {
+							"value": "@concat(\n'SELECT * FROM (',if(empty(pipeline().parameters.OverrideSQL),\n                            concat(\n                                'select * from PREIMP.Salesforce_dbo_',\n                                pipeline().parameters.SourceTable),\n                    concat(pipeline().parameters.OverrideSQL)\n                    )\n, ') a ',\n'WHERE ',pipeline().parameters.SourceWhereClause\n)",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"preCopyScript": {
+							"value": "@{concat('IF(SELECT COUNT(*) ',\n        'FROM sys.tables t ',\n        'inner join sys.schemas s ',\n        'on t.schema_id = s.schema_id ',\n        'where s.name + ''.'' + t.name = ''',pipeline().parameters.DestinationSchema,'.',pipeline().parameters.DestinationTable,''') > 0 ',\n'BEGIN ',\n\t'DROP TABLE ',pipeline().parameters.DestinationSchema,'.',pipeline().parameters.DestinationTable,' END '\n)}",
+							"type": "Expression"
+						},
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_ASDW",
+						"type": "DatasetReference",
+						"parameters": {
+							"destinationschema": "PREIMP",
+							"sourcetable": {
+								"value": "@pipeline().parameters.DestinationTable",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_ASDW",
+						"type": "DatasetReference",
+						"parameters": {
+							"destinationschema": {
+								"value": "@pipeline().parameters.DestinationSchema",
+								"type": "Expression"
+							},
+							"sourcetable": {
+								"value": "@pipeline().parameters.DestinationTable",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "LOAD_SALESFORCE_TO_PREIMP",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "EXEC_PL_UPDATE_META_CONTROLTABLE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SalesforceV2Source",
+						"includeDeletedObjects": false
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"preCopyScript": {
+							"value": "@{concat('IF(SELECT COUNT(*) ',\n        'FROM sys.tables t ',\n        'inner join sys.schemas s ',\n        'on t.schema_id = s.schema_id ',\n        'where s.name + ''.'' + t.name = ''PREIMP.',pipeline().parameters.DestinationTable,''') > 0 ',\n'BEGIN ',\n\t'DROP TABLE PREIMP.',pipeline().parameters.DestinationTable,' END '\n)}",
+							"type": "Expression"
+						},
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Salesforce_Prod",
+						"type": "DatasetReference",
+						"parameters": {
+							"SourceTable": {
+								"value": "@pipeline().parameters.SourceTable",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_ASDW",
+						"type": "DatasetReference",
+						"parameters": {
+							"destinationschema": "PREIMP",
+							"sourcetable": {
+								"value": "@pipeline().parameters.DestinationTable",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "EXEC_PL_UPDATE_META_CONTROLTABLE",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_UPDATE_META_CONTROLTABLE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"SourceSystem": {
+							"value": "@pipeline().parameters.SourceSystem",
+							"type": "Expression"
+						},
+						"SourceSchema": {
+							"value": "@pipeline().parameters.SourceSchema",
+							"type": "Expression"
+						},
+						"SourceTable": {
+							"value": "@pipeline().parameters.SourceTable",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"SourceSystem": {
+				"type": "string"
+			},
+			"Active": {
+				"type": "string"
+			},
+			"SourceSchema": {
+				"type": "string"
+			},
+			"SourceRootSchema": {
+				"type": "string"
+			},
+			"SourceTable": {
+				"type": "string",
+				"defaultValue": "Replace_with_SourceTable"
+			},
+			"SourceUniqueColumn": {
+				"type": "string"
+			},
+			"FullRefresh": {
+				"type": "string"
+			},
+			"FullRefreshOnly": {
+				"type": "string"
+			},
+			"TriggerName": {
+				"type": "string"
+			},
+			"WatermarkColumn": {
+				"type": "string"
+			},
+			"WatermarkValue": {
+				"type": "string"
+			},
+			"WatermarkFilter": {
+				"type": "string"
+			},
+			"NumParallel": {
+				"type": "string"
+			},
+			"ADLSContainer": {
+				"type": "string"
+			},
+			"FileType": {
+				"type": "string"
+			},
+			"IMPSchema": {
+				"type": "string"
+			},
+			"StageSchema": {
+				"type": "string"
+			},
+			"EDMSchema": {
+				"type": "string"
+			},
+			"EDWSchema": {
+				"type": "string"
+			},
+			"MARTSchema": {
+				"type": "string"
+			},
+			"METASchema": {
+				"type": "string"
+			},
+			"LOGSchema": {
+				"type": "string"
+			},
+			"DestinationTable": {
+				"type": "string"
+			},
+			"DestinationSQLServer": {
+				"type": "string"
+			},
+			"SourceDatabase": {
+				"type": "string"
+			},
+			"UniqueKeySQLForUpsert": {
+				"type": "string"
+			},
+			"UpsertMethod": {
+				"type": "string"
+			},
+			"MetaName": {
+				"type": "string"
+			},
+			"ControlTableName": {
+				"type": "string"
+			},
+			"ADFTriggerName": {
+				"type": "string"
+			},
+			"ADFTriggerType": {
+				"type": "string"
+			},
+			"ADFTriggerID": {
+				"type": "string"
+			},
+			"OverrideSQL": {
+				"type": "string"
+			},
+			"SourceType": {
+				"type": "string"
+			},
+			"RefreshFlags": {
+				"type": "string"
+			},
+			"FilePathName": {
+				"type": "string"
+			},
+			"FileName": {
+				"type": "string"
+			},
+			"NewWatermarkValue": {
+				"type": "string"
+			},
+			"tablecreatewithclause": {
+				"type": "string"
+			},
+			"ArchivePathName": {
+				"type": "string"
+			},
+			"DestinationSchema": {
+				"type": "string"
+			},
+			"SourceName": {
+				"type": "string"
+			},
+			"SourceLoad": {
+				"type": "string"
+			},
+			"SourceWhereClause": {
+				"type": "string"
+			},
+			"ServerName": {
+				"type": "string"
+			},
+			"ServerUser": {
+				"type": "string"
+			},
+			"ServerTokenLookup": {
+				"type": "string"
+			},
+			"OldWatermarkValue": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"TableList": {
+				"type": "String"
+			},
+			"TableListArray": {
+				"type": "Array"
+			},
+			"CombinedTableArray": {
+				"type": "Array"
+			},
+			"Delimeter": {
+				"type": "Array"
+			}
+		},
+		"folder": {
+			"name": "AFL EDW 3.0/Source_to_Stage"
+		},
+		"annotations": []
+	}
+}

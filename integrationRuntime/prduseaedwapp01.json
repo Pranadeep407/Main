@@ -1,0 +1,12 @@
+{
+	"name": "prduseaedwapp01",
+	"properties": {
+		"type": "SelfHosted",
+		"typeProperties": {
+			"linkedInfo": {
+				"resourceId": "/subscriptions/fad29ecd-fa19-416d-8ed6-56df7cc1af38/resourcegroups/prduseagsdwtrg/providers/Microsoft.DataFactory/factories/afldevdatafactory/integrationruntimes/puseaedwapp01",
+				"authorizationType": "Rbac"
+			}
+		}
+	}
+}

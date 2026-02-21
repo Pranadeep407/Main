@@ -1,0 +1,19 @@
+{
+	"name": "LS_Salesforce_Prod",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SalesforceV2",
+		"typeProperties": {
+			"environmentUrl": "https://afl.my.salesforce.com/",
+			"clientId": "3MVG9yZ.WNe6byQAalNkrjnTC4.RMzTaw2CoPN8jyr4EpQRpRPmOANeHDXGaRvif0O1aStKWGHNOFjzJA6LYh",
+			"apiVersion": "60.0",
+			"authenticationType": "OAuth2ClientCredential",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0YTY1NGUwOC1hM2EzLTQ1NjctYjgxYy00ZGQ2YjM4OWY0NTkiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "prduseaedwapp01",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,23 @@
+{
+	"name": "DS_Salesforce_Prod",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Salesforce_Prod",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"SourceTable": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SalesforceV2Object",
+		"schema": [],
+		"typeProperties": {
+			"objectApiName": {
+				"value": "@dataset().SourceTable",
+				"type": "Expression"
+			}
+		}
+	}
+}

@@ -1,0 +1,54 @@
+{
+	"name": "Email_Notification",
+	"properties": {
+		"activities": [
+			{
+				"name": "call_df_notification",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"disableCertValidation": false,
+					"url": "https://prod-38.eastus2.logic.azure.com:443/workflows/746a7ff9ee58413fb2c6fc53f7ddd8a0/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ZMxrDSoR4De3lZzNLiAEgn5gT9N4aVn7ynnEfQ1QiH0",
+					"body": {
+						"value": "@concat('{\n        \"DataFactoryName\":\"',pipeline().DataFactory,'\"\n\t,\"EmailTo\": \"',pipeline().parameters.EmailTo,'\"\n        ,\"ErrorMessage\":\"',pipeline().parameters.MessageBody,'\"\n        ,\"PipelineName\":\"',pipeline().parameters.PipelineName,'\"\n        ,\"Subject\":\"',pipeline().parameters.Subject,'\"\n}')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"EmailTo": {
+				"type": "string",
+				"defaultValue": "lyle.jones@aflglobal.com"
+			},
+			"MessageBody": {
+				"type": "string",
+				"defaultValue": "Test Message"
+			},
+			"Subject": {
+				"type": "string",
+				"defaultValue": "Email Test Subject"
+			},
+			"PipelineName": {
+				"type": "string",
+				"defaultValue": "PipeLineName"
+			}
+		},
+		"folder": {
+			"name": "AFL Controls"
+		},
+		"annotations": []
+	}
+}

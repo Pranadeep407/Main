@@ -1,0 +1,417 @@
+{
+	"name": "PL_POST_LOAD_STG",
+	"properties": {
+		"activities": [
+			{
+				"name": "UPDATE_SUCCESS_META",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "REFRESH_FLAG_LOAD_STG",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 2,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Stored Procedure Activity",
+						"value": "updates the meta.controltable in DW to FullRefresh indicator of 'N'"
+					}
+				],
+				"typeProperties": {
+					"storedProcedureName": "[AFLetl].[usp_UpdateMetaSuccess]",
+					"storedProcedureParameters": {
+						"FullRefreshOnly": {
+							"value": {
+								"value": "@pipeline().parameters.FullRefreshOnly",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"SourceSchema": {
+							"value": {
+								"value": "@pipeline().parameters.SourceSchema",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"SourceSystem": {
+							"value": {
+								"value": "@pipeline().parameters.SourceSystem",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"SourceTable": {
+							"value": {
+								"value": "@pipeline().parameters.SourceTable",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"RunId": {
+							"value": {
+								"value": "@pipeline().parameters.RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "EDW",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "UPDATE_WATERMARK",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 2,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[AFLetl].[usp_UpdateWatermark]",
+					"storedProcedureParameters": {
+						"LastModifiedtime": {
+							"value": {
+								"value": "@pipeline().parameters.NewWatermarkValue",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"SourceSchema": {
+							"value": {
+								"value": "@pipeline().parameters.SourceSchema",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"SourceSystem": {
+							"value": {
+								"value": "@pipeline().parameters.SourceSystem",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"SourceTable": {
+							"value": {
+								"value": "@pipeline().parameters.SourceTable",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "EDW",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "REFRESH_FLAG_LOAD_STG",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "UPDATE_WATERMARK",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@or(equals(pipeline().parameters.DestinationSchema,'STG' ),\nequals(pipeline().parameters.DestinationSchema,'TOPCUST' )\n)",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "UPSERT_IMP_TO_STG",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 2,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "[AFLetl].[usp_UpsertFromIMPToSTG]",
+								"storedProcedureParameters": {
+									"fullRefreshFlag": {
+										"value": {
+											"value": "@pipeline().parameters.FullRefresh",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"src_name": {
+										"value": {
+											"value": "@pipeline().parameters.SourceSystem",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"src_schema": {
+										"value": {
+											"value": "@pipeline().parameters.SourceSchema",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"src_table": {
+										"value": {
+											"value": "@pipeline().parameters.SourceTable",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"tablecreatewithclause": {
+										"value": {
+											"value": "@pipeline().parameters.tablecreatewithclause",
+											"type": "Expression"
+										},
+										"type": "String"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "EDW",
+								"type": "LinkedServiceReference"
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "EXEC_CREATE_UPDATE_META",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": "afletl.usp_UpsertSTGOnlyMeta",
+								"storedProcedureParameters": {
+									"CopyActivity_Start_Time": {
+										"value": {
+											"value": "@pipeline().parameters.CopyActivity_Start_Time",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"DestinationSchema": {
+										"value": {
+											"value": "@pipeline().parameters.DestinationSchema",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"DestinationTable": {
+										"value": {
+											"value": "@pipeline().parameters.DestinationTable",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"SourceSystem": {
+										"value": {
+											"value": "@pipeline().parameters.SourceSystem",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"SourceTable": {
+										"value": {
+											"value": "@pipeline().parameters.SourceTable",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"SourceUniqueColumn": {
+										"value": {
+											"value": "@pipeline().parameters.SourceUniqueColumn",
+											"type": "Expression"
+										},
+										"type": "String"
+									},
+									"UniqueKeySQLForUpsert": {
+										"value": {
+											"value": "@pipeline().parameters.UniqueKeySQLForUpsert",
+											"type": "Expression"
+										},
+										"type": "String"
+									}
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "LS_ASDW",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"SourceSystem": {
+				"type": "string"
+			},
+			"Active": {
+				"type": "string"
+			},
+			"SourceSchema": {
+				"type": "string"
+			},
+			"SourceRootSchema": {
+				"type": "string"
+			},
+			"SourceTable": {
+				"type": "string"
+			},
+			"SourceUniqueColumn": {
+				"type": "string"
+			},
+			"FullRefresh": {
+				"type": "string"
+			},
+			"FullRefreshOnly": {
+				"type": "string"
+			},
+			"TriggerName": {
+				"type": "string"
+			},
+			"WatermarkColumn": {
+				"type": "string"
+			},
+			"WatermarkValue": {
+				"type": "string"
+			},
+			"WatermarkFilter": {
+				"type": "string"
+			},
+			"NumParallel": {
+				"type": "string"
+			},
+			"ADLSContainer": {
+				"type": "string"
+			},
+			"FileType": {
+				"type": "string"
+			},
+			"IMPSchema": {
+				"type": "string"
+			},
+			"StageSchema": {
+				"type": "string"
+			},
+			"EDMSchema": {
+				"type": "string"
+			},
+			"EDWSchema": {
+				"type": "string"
+			},
+			"MARTSchema": {
+				"type": "string"
+			},
+			"METASchema": {
+				"type": "string"
+			},
+			"LOGSchema": {
+				"type": "string"
+			},
+			"DestinationTable": {
+				"type": "string"
+			},
+			"DestinationSQLServer": {
+				"type": "string"
+			},
+			"SourceDatabase": {
+				"type": "string"
+			},
+			"SourceUser": {
+				"type": "string"
+			},
+			"SourceServer": {
+				"type": "string"
+			},
+			"UniqueKeySQLForUpsert": {
+				"type": "string"
+			},
+			"UpsertMethod": {
+				"type": "string"
+			},
+			"MetaName": {
+				"type": "string"
+			},
+			"ControlTableName": {
+				"type": "string"
+			},
+			"ADFTriggerName": {
+				"type": "string"
+			},
+			"ADFTriggerType": {
+				"type": "string"
+			},
+			"ADFTriggerID": {
+				"type": "string"
+			},
+			"overrideSQL": {
+				"type": "string"
+			},
+			"SourceType": {
+				"type": "string"
+			},
+			"RefreshFlags": {
+				"type": "string"
+			},
+			"FilePathName": {
+				"type": "string"
+			},
+			"FileName": {
+				"type": "string"
+			},
+			"NewWatermarkValue": {
+				"type": "string"
+			},
+			"tablecreatewithclause": {
+				"type": "string"
+			},
+			"DestinationSchema": {
+				"type": "string"
+			},
+			"CopyActivity_Start_Time": {
+				"type": "string"
+			},
+			"RunId": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "AFL EDW 3.0/Post_Load_Processing"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-12-14T21:06:22Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,253 @@
+{
+	"name": "PL_ERROR_LOG",
+	"properties": {
+		"activities": [
+			{
+				"name": "ERROR_NOTIFICATION",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "GET_ERROR_LOG",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Email_Notification",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"EmailTo": "PBI_EIM_Admin@aflglobal.com",
+						"MessageBody": {
+							"value": "@replace(replace(replace(string(activity('GET_ERROR_LOG').output.value),'\"',''),'[',''),']','')",
+							"type": "Expression"
+						},
+						"Subject": {
+							"value": "@concat('ERROR ON ',pipeline().parameters.DestinationSchema,'.',pipeline().parameters.DestinationTable)",
+							"type": "Expression"
+						},
+						"PipelineName": {
+							"value": "@pipeline().parameters.Pipeline_Name",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "GET_ERROR_LOG",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "LOAD_ERROR_LOG",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "LOOK_CONTROL",
+						"value": "Lookup activity that queries the Oracle EBS source"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "SqlDWSource",
+						"sqlReaderQuery": {
+							"value": "@string(concat('SELECT '''' + ErrorDescription + '''' as ErrorDescription FROM [LOG].PipelineErrors WHERE '\n,'SourceSchema = ''',pipeline().parameters.SourceSchema,''' '\n,'AND SourceTable = ''',pipeline().parameters.SourceTable,''' '\n,'AND DestinationSchema = ''',pipeline().parameters.DestinationSchema,''' '\n,'AND DestinationTable = ''',pipeline().parameters.DestinationTable,''' '\n,'AND RunId = ''', pipeline().parameters.RunId,''' '\n,'AND ErrorLoggedTime >= ''',pipeline().parameters.ErrorLoggedTime,''''\n))",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_ASDW",
+						"type": "DatasetReference",
+						"parameters": {
+							"destinationschema": "LOG",
+							"sourcetable": "PipelineErrors"
+						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "LOAD_ERROR_LOG",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 2,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlDWSource",
+						"sqlReaderQuery": {
+							"value": "SELECT '@{pipeline().DataFactory}' as DataFactory_Name,\n'@{pipeline().parameters.Pipeline_Name}' as Pipeline_Name,\n'@{pipeline().parameters.RunId}' as RunId,\n'@{pipeline().parameters.SourceSystem}' as SourceSystem,\n'@{pipeline().parameters.FullRefresh}' as FullRefresh,\n'@{pipeline().parameters.SourceSchema}' as SourceSchema,\n'@{pipeline().parameters.SourceTable}' as SourceTable, \n'@{pipeline().parameters.DestinationSchema}' as DestinationSchema,\n'@{pipeline().parameters.DestinationTable}' as DestinationTable,\n'@{pipeline().parameters.TriggerType}' as TriggerType,\n'@{pipeline().parameters.TriggerId}' as TriggerId,\n'@{pipeline().parameters.TriggerName}' as TriggerName,\n'@{pipeline().parameters.TriggerTime}' as TriggerTime,\n'@{pipeline().parameters.ErrorDescription}' as ErrorDescription,\n'@{pipeline().parameters.ErrorCode}' as ErrorCode,\n'@{pipeline().parameters.ErrorLoggedTime}' as ErrorLoggedTime,\n'@{pipeline().parameters.FailureType}' as FailureType\n",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_ASDW",
+						"type": "DatasetReference",
+						"parameters": {
+							"destinationschema": "x",
+							"sourcetable": "y"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_ASDW",
+						"type": "DatasetReference",
+						"parameters": {
+							"destinationschema": "LOG",
+							"sourcetable": "PipelineErrors"
+						}
+					}
+				]
+			},
+			{
+				"name": "UPDATE_META_FAILURE",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "ERROR_NOTIFICATION",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[AFLetl].[usp_UpdateMetaFailure]",
+					"storedProcedureParameters": {
+						"SourceSystem": {
+							"value": {
+								"value": "@pipeline().parameters.SourceSystem",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"SourceSchema": {
+							"value": {
+								"value": "@pipeline().parameters.SourceSchema",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"SourceTable": {
+							"value": {
+								"value": "@pipeline().parameters.SourceTable",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"errorloggedtime": {
+							"value": {
+								"value": "@pipeline().parameters.ErrorLoggedTime",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "EDW",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"DataFactory": {
+				"type": "string"
+			},
+			"Pipeline_Name": {
+				"type": "string"
+			},
+			"RunId": {
+				"type": "string"
+			},
+			"SourceSystem": {
+				"type": "string"
+			},
+			"FullRefresh": {
+				"type": "string"
+			},
+			"SourceSchema": {
+				"type": "string"
+			},
+			"SourceTable": {
+				"type": "string"
+			},
+			"DestinationSchema": {
+				"type": "string"
+			},
+			"DestinationTable": {
+				"type": "string"
+			},
+			"TriggerType": {
+				"type": "string"
+			},
+			"TriggerId": {
+				"type": "string"
+			},
+			"TriggerName": {
+				"type": "string"
+			},
+			"TriggerTime": {
+				"type": "string"
+			},
+			"ErrorDescription": {
+				"type": "string"
+			},
+			"ErrorCode": {
+				"type": "string"
+			},
+			"ErrorLoggedTime": {
+				"type": "string"
+			},
+			"FailureType": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "AFL EDW 3.0/Pipeline_Logging"
+		},
+		"annotations": []
+	}
+}

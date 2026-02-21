@@ -1,0 +1,34 @@
+{
+	"name": "DS_ASDW",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EDW",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"destinationschema": {
+				"type": "string",
+				"defaultValue": "stg"
+			},
+			"sourcetable": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "3Cloud"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().destinationschema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().sourcetable",
+				"type": "Expression"
+			}
+		}
+	}
+}

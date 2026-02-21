@@ -1,0 +1,143 @@
+{
+	"name": "PL_SOURCE_SUCCESS_LOG",
+	"properties": {
+		"activities": [
+			{
+				"name": "LOAD_SOURCE_SUCCESS_LOG",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 2,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlDWSource",
+						"sqlReaderQuery": {
+							"value": "SELECT '@{pipeline().parameters.DataFactory}' as DataFactory_Name,\n'@{pipeline().parameters.Pipeline_Name}' as Pipeline_Name,\n'@{pipeline().parameters.RunId}' as RunId,\n'@{pipeline().parameters.SourceSystem}' as SourceSystem,\n'@{pipeline().parameters.FullRefresh}' as FullRefresh,\n'@{pipeline().parameters.SourceSchema}' as SourceSchema,\n'@{pipeline().parameters.SourceTable}' as SourceTable, \n'@{pipeline().parameters.DestinationSchema}' as DestinationSchema,\n'@{pipeline().parameters.DestinationTable}' as DestinationTable,\n'@{pipeline().parameters.TriggerType}' as TriggerType,\n'@{pipeline().parameters.TriggerID}' as TriggerId,\n'@{pipeline().parameters.TriggerName}' as TriggerName,\n'@{pipeline().parameters.TriggerTime}' as TriggerTime,\n'@{pipeline().parameters.RowsCopied}' as RowsCopied,\n'@{pipeline().parameters.RowsRead}' as RowsRead,\n'@{pipeline().parameters.No_ParallelCopies}' as No_ParallelCopies,\n'@{pipeline().parameters.copyDuration}' as copyDuration_in_secs,\n'@{pipeline().parameters.effectiveIntegrationRuntime}' as effectiveIntegrationRuntime,\n'@{pipeline().parameters.Source_Type}' as Source_Type,\n'@{pipeline().parameters.Sink_Type}' as Sink_Type,\n'@{pipeline().parameters.Execution_Status}' as Execution_Status,\n'@{pipeline().parameters.CopyActivity_Start_Time}' as CopyActivity_Start_Time,\n'@{pipeline().parameters.CopyActivity_End_Time}' as CopyActivity_End_Time,\n'@{pipeline().parameters.CopyActivity_queuingDuration_in_secs}' as CopyActivity_queuingDuration_in_secs,\n'@{pipeline().parameters.CopyActivity_preCopyScriptDuration_in_secs}' as CopyActivity_preCopyScriptDuration_in_secs,\n'@{pipeline().parameters.CopyActivity_transferDuration_in_secs}' as CopyActivity_transferDuration_in_secs\n",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_ASDW",
+						"type": "DatasetReference",
+						"parameters": {
+							"destinationschema": "LOG",
+							"sourcetable": "PipelineRuns"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_ASDW",
+						"type": "DatasetReference",
+						"parameters": {
+							"destinationschema": "LOG",
+							"sourcetable": "PipelineRuns"
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"DataFactory": {
+				"type": "string"
+			},
+			"Pipeline_Name": {
+				"type": "string"
+			},
+			"RunId": {
+				"type": "string"
+			},
+			"SourceSystem": {
+				"type": "string"
+			},
+			"FullRefresh": {
+				"type": "string"
+			},
+			"SourceSchema": {
+				"type": "string"
+			},
+			"SourceTable": {
+				"type": "string"
+			},
+			"DestinationSchema": {
+				"type": "string"
+			},
+			"DestinationTable": {
+				"type": "string"
+			},
+			"TriggerType": {
+				"type": "string"
+			},
+			"TriggerId": {
+				"type": "string"
+			},
+			"TriggerName": {
+				"type": "string"
+			},
+			"TriggerTime": {
+				"type": "string"
+			},
+			"RowsCopied": {
+				"type": "string"
+			},
+			"RowsRead": {
+				"type": "string"
+			},
+			"No_ParallelCopies": {
+				"type": "string"
+			},
+			"copyDuration": {
+				"type": "string"
+			},
+			"effectiveIntegrationRuntime": {
+				"type": "string"
+			},
+			"Source_Type": {
+				"type": "string"
+			},
+			"Sink_Type": {
+				"type": "string"
+			},
+			"Execution_Status": {
+				"type": "string"
+			},
+			"CopyActivity_Start_Time": {
+				"type": "string"
+			},
+			"CopyActivity_End_Time": {
+				"type": "string"
+			},
+			"CopyActivity_queuingDuration_in_secs": {
+				"type": "string"
+			},
+			"CopyActivity_preCopyScriptDuration_in_secs": {
+				"type": "string"
+			},
+			"CopyActivity_transferDuration_in_secs": {
+				"type": "string"
+			},
+			"SourceLoad": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "AFL EDW 3.0/Pipeline_Logging"
+		},
+		"annotations": []
+	}
+}
