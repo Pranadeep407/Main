@@ -1,0 +1,14 @@
+{
+	"name": "AzureDataLakeStorage3",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://stornews.dfs.core.windows.net/"
+		},
+		"connectVia": {
+			"referenceName": "ManagedIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
