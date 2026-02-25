@@ -6,10 +6,6 @@
 		"type": "AzureBlobFS",
 		"typeProperties": {
 			"url": "https://adlspractice1.dfs.core.windows.net/"
-		},
-		"connectVia": {
-			"referenceName": "integrationRuntime1",
-			"type": "IntegrationRuntimeReference"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/linkedservices"
