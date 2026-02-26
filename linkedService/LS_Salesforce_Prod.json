@@ -10,10 +10,6 @@
 			"apiVersion": "60.0",
 			"authenticationType": "OAuth2ClientCredential",
 			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI0YTY1NGUwOC1hM2EzLTQ1NjctYjgxYy00ZGQ2YjM4OWY0NTkiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
-		},
-		"connectVia": {
-			"referenceName": "prduseaedwapp01",
-			"type": "IntegrationRuntimeReference"
 		}
 	}
 }
