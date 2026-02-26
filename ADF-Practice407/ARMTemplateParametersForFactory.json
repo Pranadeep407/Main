@@ -11,6 +11,18 @@
 		"AzureSqlDatabase3_connectionString": {
 			"value": ""
 		},
+		"EDW_connectionString": {
+			"value": ""
+		},
+		"GoogleCloudStorage1_secretAccessKey": {
+			"value": ""
+		},
+		"LS_ASDW_connectionString": {
+			"value": ""
+		},
+		"LS_Salesforce_Prod_clientSecret": {
+			"value": ""
+		},
 		"MVnet_ADLS_accountKey": {
 			"value": ""
 		},
@@ -32,6 +44,12 @@
 		"AzureDataLakeStorage2_sasUri": {
 			"value": ""
 		},
+		"AzureDataLakeStorage3_properties_typeProperties_url": {
+			"value": "https://stornews.dfs.core.windows.net/"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://kv-practice407.vault.azure.net/"
+		},
 		"AzurePostgreSql1_properties_typeProperties_server": {
 			"value": "apple123.postgres.database.azure.com"
 		},
@@ -46,6 +64,15 @@
 		},
 		"AzureSqlDatabase4_properties_typeProperties_database": {
 			"value": "db_apple"
+		},
+		"GoogleCloudStorage1_properties_typeProperties_accessKeyId": {
+			"value": "efjwbkjewbfjhwvdkj"
+		},
+		"LS_Salesforce_Prod_properties_typeProperties_environmentUrl": {
+			"value": "https://afl.my.salesforce.com/"
+		},
+		"LS_Salesforce_Prod_properties_typeProperties_clientId": {
+			"value": "3MVG9yZ.WNe6byQAalNkrjnTC4.RMzTaw2CoPN8jyr4EpQRpRPmOANeHDXGaRvif0O1aStKWGHNOFjzJA6LYh"
 		},
 		"MVnet_ADLS_properties_typeProperties_url": {
 			"value": "https://adlspractice1.dfs.core.windows.net/"
@@ -89,6 +116,9 @@
 		"trigger2_properties_typeProperties_scope": {
 			"value": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Storage/storageAccounts/adlspractice1"
 		},
+		"integrationRuntime2_properties_typeProperties_linkedInfo_resourceId": {
+			"value": "/subscriptions/eb6eb6b8-2768-4bee-bf31-23e931432323/resourcegroups/TestEnvironment/providers/Microsoft.DataFactory/factories/Vaishnavitestadf/integrationruntimes/SHIRtest"
+		},
 		"AzureBlobStorage870_properties_privateLinkResourceId": {
 			"value": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Storage/storageAccounts/blob0120120120"
 		},
@@ -99,6 +129,12 @@
 			"value": [
 				"blob0120120120.blob.core.windows.net"
 			]
+		},
+		"AzureDataLakeStorage370_properties_privateLinkResourceId": {
+			"value": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Storage/storageAccounts/blob0120120120"
+		},
+		"AzureDataLakeStorage370_properties_groupId": {
+			"value": "dfs"
 		},
 		"AzureDataLakeStorage995_properties_privateLinkResourceId": {
 			"value": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/ADF2/providers/Microsoft.Storage/storageAccounts/adf2adf"

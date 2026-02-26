@@ -7,6 +7,22 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "ADF-Practice407"
 		},
+		"EDW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EDW'"
+		},
+		"GoogleCloudStorage1_secretAccessKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'secretAccessKey' of 'GoogleCloudStorage1'"
+		},
+		"LS_ASDW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_ASDW'"
+		},
+		"LS_Salesforce_Prod_clientSecret": {
+			"type": "secureString",
+			"metadata": "Secure string for 'clientSecret' of 'LS_Salesforce_Prod'"
+		},
 		"Sftp1_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Sftp1'"
@@ -22,6 +38,22 @@
 		"AzureDataLakeStorage2_sasUri": {
 			"type": "secureString",
 			"metadata": "Secure string for 'sasUri' of 'AzureDataLakeStorage2'"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kv-practice407.vault.azure.net/"
+		},
+		"GoogleCloudStorage1_properties_typeProperties_accessKeyId": {
+			"type": "string",
+			"defaultValue": "efjwbkjewbfjhwvdkj"
+		},
+		"LS_Salesforce_Prod_properties_typeProperties_environmentUrl": {
+			"type": "string",
+			"defaultValue": "https://afl.my.salesforce.com/"
+		},
+		"LS_Salesforce_Prod_properties_typeProperties_clientId": {
+			"type": "string",
+			"defaultValue": "3MVG9yZ.WNe6byQAalNkrjnTC4.RMzTaw2CoPN8jyr4EpQRpRPmOANeHDXGaRvif0O1aStKWGHNOFjzJA6LYh"
 		},
 		"Sftp1_properties_typeProperties_host": {
 			"type": "string",
@@ -70,6 +102,15 @@
 					},
 					{
 						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					},
+					{
+						"name": "Wait2",
 						"type": "Wait",
 						"dependsOn": [],
 						"userProperties": [],
@@ -266,6 +307,53 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/pipeline7')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"description": "sample check",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline8')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -289,6 +377,83 @@
 				"type": "AzureBlobFS",
 				"typeProperties": {
 					"sasUri": "[parameters('AzureDataLakeStorage2_sasUri')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVault1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EDW')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDW",
+				"typeProperties": {
+					"connectionString": "[parameters('EDW_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GoogleCloudStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "GoogleCloudStorage",
+				"typeProperties": {
+					"serviceUrl": "https://storage.googleapis.com",
+					"accessKeyId": "[parameters('GoogleCloudStorage1_properties_typeProperties_accessKeyId')]",
+					"secretAccessKey": {
+						"type": "SecureString",
+						"value": "[parameters('GoogleCloudStorage1_secretAccessKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_ASDW')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDW",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_ASDW_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_Salesforce_Prod')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SalesforceV2",
+				"typeProperties": {
+					"environmentUrl": "[parameters('LS_Salesforce_Prod_properties_typeProperties_environmentUrl')]",
+					"clientId": "[parameters('LS_Salesforce_Prod_properties_typeProperties_clientId')]",
+					"clientSecret": {
+						"type": "SecureString",
+						"value": "[parameters('LS_Salesforce_Prod_clientSecret')]"
+					},
+					"apiVersion": "60.0",
+					"authenticationType": "OAuth2ClientCredential"
 				}
 			},
 			"dependsOn": []
@@ -338,6 +503,94 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/EDW3 Master Daily')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2023-06-05T22:00:00",
+						"timeZone": "Eastern Standard Time",
+						"schedule": {
+							"minutes": [
+								0
+							],
+							"hours": [
+								22
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FORECAST_PLAN_MONTHLY_TRIGGER')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Trigger forecast/plan data to refresh on the 12th of every month. ",
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Month",
+						"interval": 1,
+						"startTime": "2024-03-12T18:00:00",
+						"timeZone": "Eastern Standard Time",
+						"schedule": {
+							"minutes": [
+								0
+							],
+							"hours": [
+								18
+							],
+							"monthDays": [
+								12
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PlanetTogether Only')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2023-04-06T06:00:00",
+						"timeZone": "Eastern Standard Time",
+						"schedule": {
+							"minutes": [
+								0
+							],
+							"hours": [
+								8
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/OnPremIR')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
@@ -348,619 +601,6 @@
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",
-			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "SelfHosted",
-				"typeProperties": {}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/default')]",
-			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
-			"apiVersion": "2018-06-01",
-			"properties": {},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/10_Rec')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "10_Rec_Json.txt",
-						"folderPath": "Input",
-						"fileSystem": "prac"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"productListItems": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"_adobe_corpnew": {
-										"type": "null"
-									},
-									"priceTotal": {
-										"type": "number"
-									},
-									"_experience": {
-										"type": "null"
-									},
-									"quantity": {
-										"type": "number"
-									},
-									"SKU": {
-										"type": "string"
-									}
-								}
-							}
-						},
-						"commerce": {
-							"type": "object",
-							"properties": {
-								"order": {
-									"type": "string"
-								},
-								"purchases": {
-									"type": "object",
-									"properties": {
-										"value": {
-											"type": "number"
-										},
-										"id": {
-											"type": "string"
-										}
-									}
-								}
-							}
-						},
-						"botDetection": {
-							"type": "object",
-							"properties": {
-								"name": {
-									"type": "string"
-								},
-								"score": {
-									"type": "number"
-								}
-							}
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/3_Value_Json')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "new_3_Json.txt",
-						"folderPath": "Input",
-						"fileSystem": "prac"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"productListItems": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"_adobe_corpnew": {
-										"type": "null"
-									},
-									"priceTotal": {
-										"type": "number"
-									},
-									"_experience": {
-										"type": "null"
-									},
-									"quantity": {
-										"type": "number"
-									},
-									"SKU": {
-										"type": "string"
-									}
-								}
-							}
-						},
-						"commerce": {
-							"type": "object",
-							"properties": {
-								"order": {
-									"type": "null"
-								},
-								"purchases": {
-									"type": "object",
-									"properties": {
-										"value": {
-											"type": "number"
-										},
-										"id": {
-											"type": "null"
-										}
-									}
-								}
-							}
-						},
-						"botDetection": {
-							"type": "object",
-							"properties": {
-								"name": {
-									"type": "null"
-								},
-								"score": {
-									"type": "number"
-								}
-							}
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "SalesData.csv",
-						"folderPath": "Input",
-						"fileSystem": "prac"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "SaleID",
-						"type": "String"
-					},
-					{
-						"name": "Product",
-						"type": "String"
-					},
-					{
-						"name": "Quantity",
-						"type": "String"
-					},
-					{
-						"name": "Price",
-						"type": "String"
-					},
-					{
-						"name": "SaleDate",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText2')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"folderPath": "Input",
-						"fileSystem": "prac"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "CustomerID",
-						"type": "String"
-					},
-					{
-						"name": "Name",
-						"type": "String"
-					},
-					{
-						"name": "Email",
-						"type": "String"
-					},
-					{
-						"name": "Phone",
-						"type": "String"
-					},
-					{
-						"name": "JoinDate",
-						"type": "String"
-					},
-					{
-						"name": "Country",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText3')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "stage-plutus-dataenrichment-adf_Trigger runs.csv",
-						"folderPath": "Input",
-						"fileSystem": "prac"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Trigger name",
-						"type": "String"
-					},
-					{
-						"name": "Trigger time",
-						"type": "String"
-					},
-					{
-						"name": "Status",
-						"type": "String"
-					},
-					{
-						"name": "Pipelines",
-						"type": "String"
-					},
-					{
-						"name": "Trigger file name",
-						"type": "String"
-					},
-					{
-						"name": "Trigger file size",
-						"type": "String"
-					},
-					{
-						"name": "Message",
-						"type": "String"
-					},
-					{
-						"name": "Properties",
-						"type": "String"
-					},
-					{
-						"name": "Run ID",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText4')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileSystem": "prac"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "CustomerID",
-						"type": "String"
-					},
-					{
-						"name": "Name",
-						"type": "String"
-					},
-					{
-						"name": "Email",
-						"type": "String"
-					},
-					{
-						"name": "Phone",
-						"type": "String"
-					},
-					{
-						"name": "JoinDate",
-						"type": "String"
-					},
-					{
-						"name": "Country",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Json1_Null')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "testfile_updated.json",
-						"folderPath": "Input",
-						"fileSystem": "prac"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"productListItems": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"_adobe_corpnew": {
-										"type": "null"
-									},
-									"priceTotal": {
-										"type": "number"
-									},
-									"_experience": {
-										"type": "null"
-									},
-									"quantity": {
-										"type": "number"
-									},
-									"SKU": {
-										"type": "string"
-									}
-								}
-							}
-						},
-						"commerce": {
-							"type": "object",
-							"properties": {
-								"order": {
-									"type": "null"
-								},
-								"purchases": {
-									"type": "object",
-									"properties": {
-										"value": {
-											"type": "number"
-										},
-										"id": {
-											"type": "null"
-										}
-									}
-								}
-							}
-						},
-						"botDetection": {
-							"type": "object",
-							"properties": {
-								"name": {
-									"type": "null"
-								},
-								"score": {
-									"type": "number"
-								}
-							}
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Json_NoNull')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureDataLakeStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": "_MConverter.eu_json.json",
-						"folderPath": "Input",
-						"fileSystem": "prac"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"productListItems": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"_adobe_corpnew": {
-										"type": "string"
-									},
-									"priceTotal": {
-										"type": "number"
-									},
-									"_experience": {
-										"type": "object",
-										"properties": {
-											"analytics": {
-												"type": "object",
-												"properties": {
-													"customDimensions": {
-														"type": "object",
-														"properties": {
-															"eVars": {
-																"type": "object",
-																"properties": {
-																	"eVar97": {
-																		"type": "string"
-																	},
-																	"eVar124": {
-																		"type": "string"
-																	},
-																	"eVar61": {
-																		"type": "string"
-																	},
-																	"eVar25": {
-																		"type": "string"
-																	},
-																	"eVar90": {
-																		"type": "string"
-																	},
-																	"eVar41": {
-																		"type": "string"
-																	}
-																}
-															}
-														}
-													},
-													"event301to400": {
-														"type": "string"
-													},
-													"event101to200": {
-														"type": "string"
-													},
-													"event801to900": {
-														"type": "string"
-													},
-													"event401to500": {
-														"type": "string"
-													}
-												}
-											}
-										}
-									},
-									"quantity": {
-										"type": "number"
-									},
-									"SKU": {
-										"type": "string"
-									}
-								}
-							}
-						},
-						"commerce": {
-							"type": "object",
-							"properties": {
-								"order": {
-									"type": "string"
-								},
-								"purchases": {
-									"type": "object",
-									"properties": {
-										"value": {
-											"type": "number"
-										},
-										"id": {
-											"type": "string"
-										}
-									}
-								}
-							}
-						},
-						"botDetection": {
-							"type": "object",
-							"properties": {
-								"name": {
-									"type": "string"
-								},
-								"score": {
-									"type": "number"
-								}
-							}
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
-			]
 		}
 	]
 }

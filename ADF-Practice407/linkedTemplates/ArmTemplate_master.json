@@ -15,6 +15,22 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase3'"
 		},
+		"EDW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'EDW'"
+		},
+		"GoogleCloudStorage1_secretAccessKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'secretAccessKey' of 'GoogleCloudStorage1'"
+		},
+		"LS_ASDW_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_ASDW'"
+		},
+		"LS_Salesforce_Prod_clientSecret": {
+			"type": "secureString",
+			"metadata": "Secure string for 'clientSecret' of 'LS_Salesforce_Prod'"
+		},
 		"MVnet_ADLS_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'MVnet_ADLS'"
@@ -43,6 +59,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'sasUri' of 'AzureDataLakeStorage2'"
 		},
+		"AzureDataLakeStorage3_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://stornews.dfs.core.windows.net/"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kv-practice407.vault.azure.net/"
+		},
 		"AzurePostgreSql1_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "apple123.postgres.database.azure.com"
@@ -62,6 +86,18 @@
 		"AzureSqlDatabase4_properties_typeProperties_database": {
 			"type": "string",
 			"defaultValue": "db_apple"
+		},
+		"GoogleCloudStorage1_properties_typeProperties_accessKeyId": {
+			"type": "string",
+			"defaultValue": "efjwbkjewbfjhwvdkj"
+		},
+		"LS_Salesforce_Prod_properties_typeProperties_environmentUrl": {
+			"type": "string",
+			"defaultValue": "https://afl.my.salesforce.com/"
+		},
+		"LS_Salesforce_Prod_properties_typeProperties_clientId": {
+			"type": "string",
+			"defaultValue": "3MVG9yZ.WNe6byQAalNkrjnTC4.RMzTaw2CoPN8jyr4EpQRpRPmOANeHDXGaRvif0O1aStKWGHNOFjzJA6LYh"
 		},
 		"MVnet_ADLS_properties_typeProperties_url": {
 			"type": "string",
@@ -119,6 +155,10 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Storage/storageAccounts/adlspractice1"
 		},
+		"integrationRuntime2_properties_typeProperties_linkedInfo_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/eb6eb6b8-2768-4bee-bf31-23e931432323/resourcegroups/TestEnvironment/providers/Microsoft.DataFactory/factories/Vaishnavitestadf/integrationruntimes/SHIRtest"
+		},
 		"AzureBlobStorage870_properties_privateLinkResourceId": {
 			"type": "string",
 			"defaultValue": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Storage/storageAccounts/blob0120120120"
@@ -132,6 +172,14 @@
 			"defaultValue": [
 				"blob0120120120.blob.core.windows.net"
 			]
+		},
+		"AzureDataLakeStorage370_properties_privateLinkResourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/f0cc9c6b-ae77-41ef-bade-3facc2812ec5/resourceGroups/RG-Practice/providers/Microsoft.Storage/storageAccounts/blob0120120120"
+		},
+		"AzureDataLakeStorage370_properties_groupId": {
+			"type": "string",
+			"defaultValue": "dfs"
 		},
 		"AzureDataLakeStorage995_properties_privateLinkResourceId": {
 			"type": "string",
@@ -216,6 +264,18 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"EDW_connectionString": {
+						"value": "[parameters('EDW_connectionString')]"
+					},
+					"GoogleCloudStorage1_secretAccessKey": {
+						"value": "[parameters('GoogleCloudStorage1_secretAccessKey')]"
+					},
+					"LS_ASDW_connectionString": {
+						"value": "[parameters('LS_ASDW_connectionString')]"
+					},
+					"LS_Salesforce_Prod_clientSecret": {
+						"value": "[parameters('LS_Salesforce_Prod_clientSecret')]"
+					},
 					"Sftp1_password": {
 						"value": "[parameters('Sftp1_password')]"
 					},
@@ -227,6 +287,18 @@
 					},
 					"AzureDataLakeStorage2_sasUri": {
 						"value": "[parameters('AzureDataLakeStorage2_sasUri')]"
+					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
+					"GoogleCloudStorage1_properties_typeProperties_accessKeyId": {
+						"value": "[parameters('GoogleCloudStorage1_properties_typeProperties_accessKeyId')]"
+					},
+					"LS_Salesforce_Prod_properties_typeProperties_environmentUrl": {
+						"value": "[parameters('LS_Salesforce_Prod_properties_typeProperties_environmentUrl')]"
+					},
+					"LS_Salesforce_Prod_properties_typeProperties_clientId": {
+						"value": "[parameters('LS_Salesforce_Prod_properties_typeProperties_clientId')]"
 					},
 					"Sftp1_properties_typeProperties_host": {
 						"value": "[parameters('Sftp1_properties_typeProperties_host')]"
@@ -258,6 +330,29 @@
 				"mode": "incremental",
 				"templateLink": {
 					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"integrationRuntime2_properties_typeProperties_linkedInfo_resourceId": {
+						"value": "[parameters('integrationRuntime2_properties_typeProperties_linkedInfo_resourceId')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF-Practice407_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "ADF-Practice407_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
 					"contentVersion": "1.0.0.0"
 				},
 				"parameters": {
@@ -309,6 +404,12 @@
 					"AzureBlobStorage870_properties_fqdns": {
 						"value": "[parameters('AzureBlobStorage870_properties_fqdns')]"
 					},
+					"AzureDataLakeStorage370_properties_privateLinkResourceId": {
+						"value": "[parameters('AzureDataLakeStorage370_properties_privateLinkResourceId')]"
+					},
+					"AzureDataLakeStorage370_properties_groupId": {
+						"value": "[parameters('AzureDataLakeStorage370_properties_groupId')]"
+					},
 					"AzureDataLakeStorage995_properties_privateLinkResourceId": {
 						"value": "[parameters('AzureDataLakeStorage995_properties_privateLinkResourceId')]"
 					},
@@ -348,41 +449,6 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'ADF-Practice407_ArmTemplate_0')]"
-			]
-		},
-		{
-			"name": "ADF-Practice407_ArmTemplate_2",
-			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2024-03-01",
-			"properties": {
-				"mode": "incremental",
-				"templateLink": {
-					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"factoryName": {
-						"value": "[parameters('factoryName')]"
-					},
-					"AzureSqlDatabase3_connectionString": {
-						"value": "[parameters('AzureSqlDatabase3_connectionString')]"
-					},
-					"MVnet_ADLS_accountKey": {
-						"value": "[parameters('MVnet_ADLS_accountKey')]"
-					},
-					"AzureSqlDatabase4_properties_typeProperties_server": {
-						"value": "[parameters('AzureSqlDatabase4_properties_typeProperties_server')]"
-					},
-					"AzureSqlDatabase4_properties_typeProperties_database": {
-						"value": "[parameters('AzureSqlDatabase4_properties_typeProperties_database')]"
-					},
-					"MVnet_ADLS_properties_typeProperties_url": {
-						"value": "[parameters('MVnet_ADLS_properties_typeProperties_url')]"
-					}
-				}
-			},
-			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'ADF-Practice407_ArmTemplate_1')]"
 			]
 		},
@@ -399,6 +465,24 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"AzureSqlDatabase3_connectionString": {
+						"value": "[parameters('AzureSqlDatabase3_connectionString')]"
+					},
+					"MVnet_ADLS_accountKey": {
+						"value": "[parameters('MVnet_ADLS_accountKey')]"
+					},
+					"AzureDataLakeStorage3_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage3_properties_typeProperties_url')]"
+					},
+					"AzureSqlDatabase4_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase4_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase4_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase4_properties_typeProperties_database')]"
+					},
+					"MVnet_ADLS_properties_typeProperties_url": {
+						"value": "[parameters('MVnet_ADLS_properties_typeProperties_url')]"
 					},
 					"trigger2_properties_typeProperties_scope": {
 						"value": "[parameters('trigger2_properties_typeProperties_scope')]"
